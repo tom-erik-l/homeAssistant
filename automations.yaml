@@ -1,0 +1,12 @@
+- id: '1591530618005'
+  alias: Dim lights at sunset
+  description: ''
+  trigger:
+  - event: sunset
+    offset: -01:00
+    platform: sun
+  condition: []
+  action:
+  - data:
+      entity_id: all
+    service: light.toggle
