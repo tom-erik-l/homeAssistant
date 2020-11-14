@@ -1,0 +1,104 @@
+title: Jyllandsgade11
+views:
+  - path: default_view
+    title: Home
+    badges:
+      - entity: binary_sensor.updater
+      - entity: person.tom_erik
+      - entity: sensor.time
+      - entity: sensor.local_ip
+      - entity: sensor.tradfri_remote_control_7
+      - entity: sensor.tradfri_remote_control_2
+      - entity: sensor.ved_dor
+      - entity: sensor.ved_dor_2
+      - entity: sensor.tradfri_remote_control_6
+      - entity: sensor.tradfri_remote_control_3
+      - entity: sensor.transmission_down_speed
+      - entity: sensor.transmission_up_speed
+      - entity: sensor.transmission_status
+      - entity: sensor.transmission_active_torrents
+      - entity: sensor.transmission_paused_torrents
+      - entity: sensor.transmission_total_torrents
+      - entity: sensor.transmission_completed_torrents
+      - entity: sensor.transmission_started_torrents
+      - entity: sun.sun
+    cards:
+
+      # - type: entities
+      #   entities:
+      #     - light.badevaerelse
+      #     - light.badevaerelse_2
+      #     - light.badevaerelse_3
+      #   title: Bathroom
+
+      # - type: entities
+      #   entities:
+      #     - light.sovevaerelse
+      #     - light.sovevaerelse_2
+      #     - light.sovevaerelse_3
+      #   title: Bedroom
+
+      # - type: entities
+      #   entities:
+      #     - light.spisestue_spot
+      #     - light.spisebord
+      #     - light.spisestue_spot_2
+      #     - light.spisestue_spot_3
+      #     - light.spisestue_spot_4
+      #   title: Dining room
+
+      # - type: entities
+      #   entities:
+      #     - light.gang
+      #     - light.gang_2
+      #   title: Hallway
+
+      # - type: entities
+      #   entities:
+      #     - light.kokken
+      #     - light.kokken_2
+      #     - light.kokken_3
+      #   title: Kitchen
+
+      - type: entities
+        entities:
+          - sensor.hp_officejet_pro_x451dw_printer
+          # - light.stue_spot
+          # - light.stue_spot_2
+          # - light.stue_spot_3
+          # - light.stue_spot_4
+          - sensor.skrivebord
+          - switch.media_corner_control_outlet
+          - switch.desk_control_outlet
+        title: Living Room
+
+      - type: media-control
+        entity: media_player.projector
+      - type: media-control
+        entity: media_player.chromecastaudio4176
+
+      - type: entities
+        entities:
+          - input_datetime.wakeup_time
+          - input_boolean.wakeup_enabled
+          - input_boolean.wakeup_weekend
+          - input_boolean.wakeup_test
+        title: Wake-up Lights
+        show_header_toggle: true
+
+      - type: entities
+        entities:
+          - light.badevaerelse_lys
+          - light.gang_lys
+          - light.hele_stue_lys
+          - light.kokken_lys
+          - light.sovevaerelse_lys
+          - light.spisestue_lys
+          - light.stue_lys
+        title: Light
+
+      - type: weather-forecast
+        entity: weather.jyllandsgade11
+
+      - type: button
+        entity: switch.flux_lights
