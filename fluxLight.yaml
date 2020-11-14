@@ -1,0 +1,17 @@
+# Documentation at:
+  # https://blog.viktorpetersson.com/2020/05/25/homeassistant-ikea-tradfri-flux-sensors.html
+  # https://www.home-assistant.io/integrations/flux/
+
+- platform: flux
+  lights:
+    - light.badevaerelse_lys
+    - light.gang_lys
+    # - light.hele_stue_lys
+    - light.kokken_lys
+    - light.sovevaerelse_lys
+    - light.spisestue_lys
+    - light.stue_lys
+  name: Flux Lights
+  start_time: '6:00'
+  stop_time: '23:59'
+  mode: mired
