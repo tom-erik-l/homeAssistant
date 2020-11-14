@@ -1,5 +1,5 @@
-- id: '1591530618005'
-  alias: Dim lights at sunset
+# id: '1591530618005'
+- alias: Dim lights at sunset
   description: ''
   trigger:
   - event: sunset

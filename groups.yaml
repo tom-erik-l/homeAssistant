@@ -7,3 +7,4 @@ alarm_clock:
     - input_datetime.wakeup_time
     - input_boolean.wakeup_enabled
     - input_boolean.wakeup_weekend
+    - input_boolean.wakeup_test

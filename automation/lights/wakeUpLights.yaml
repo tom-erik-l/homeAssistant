@@ -1,0 +1,30 @@
+# automations.yaml
+- alias: "Wake-me up using bedroom lights"
+  trigger:
+    platform: template
+    value_template: "{{ states('sensor.time') == (states.input_datetime.wakeup_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+  condition:
+    - condition: state
+      entity_id: input_boolean.wakeup_enabled
+      state: 'on'
+    - condition: or # One of the conditions below must be true
+      conditions:
+        - condition: state # Will be true when the switch is 'on'
+          entity_id: input_boolean.wakeup_weekend
+          state: 'on'
+        - condition: time # Will be true on weekdays
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
+        - condition: state
+          entity_id: input_boolean.wakeup_test
+          state: 'on'
+  action:
+  - service: light.turn_on
+    entity_id: light.stue_lys
+    data:
+      transition: 600 # Transition time in seconds
+      brightness: 255
