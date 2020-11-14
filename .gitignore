@@ -1,4 +1,7 @@
+# First, ignore everything
 *
+# Now, whitelist anything that's a directory
+!*/
 
 # White list
 !*.yaml
