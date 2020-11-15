@@ -3,35 +3,18 @@
   trigger:
     - platform: state
       entity_id: light.badevaerelse_lys, light.gang_lys, light.hele_stue_lys, light.kokken_lys, light.sovevaerelse_lys, light.spisestue_lys, light.stue_lys
-      to: "on"
+      from: 'off'
+      to: 'on'
     - platform: time_pattern
       seconds: '/30'
   condition:
     - condition: state
-      entity_id: switch.flux
+      entity_id: switch.flux_lights
       state: 'on'
   action:
-    service: switch.flux_lights_update
-
-
-
-
-    # condition:
-    #   - condition: state
-    #     entity_id: input_boolean.wakeup_enabled
-    #     state: 'on'
-    #   - condition: or # One of the conditions below must be true
-    #     conditions:
-    #       - condition: state # Will be true when the switch is 'on'
-    #         entity_id: input_boolean.wakeup_weekend
-    #         state: 'on'
-    #       - condition: time # Will be true on weekdays
-    #         weekday:
-    #           - mon
-    #           - tue
-    #           - wed
-    #           - thu
-    #           - fri
-    #       - condition: state
-    #         entity_id: input_boolean.wakeup_test
-    #         state: 'on'
+    - service: switch.flux_lights_update
+    # - service: system_log.write
+    #   data_template:
+    #     level: error
+    #     logger: my_error
+    #     message: "Triggered flux light automation"
