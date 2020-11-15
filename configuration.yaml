@@ -10,6 +10,11 @@ tts:
 tradfri:
   host: "192.168.1.20"
 
+logger:
+  default: error
+  logs:
+      my_error: error
+
 group: !include groups.yaml
 automation: !include_dir_merge_list automation/
 script: !include_dir_merge_named  script/
