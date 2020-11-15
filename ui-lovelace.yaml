@@ -3,25 +3,26 @@ views:
   - path: default_view
     title: Home
     badges:
-      - entity: binary_sensor.updater
-      - entity: person.tom_erik
-      - entity: sensor.time
-      - entity: sensor.local_ip
-      - entity: sensor.tradfri_remote_control_7
-      - entity: sensor.tradfri_remote_control_2
-      - entity: sensor.ved_dor
-      - entity: sensor.ved_dor_2
-      - entity: sensor.tradfri_remote_control_6
-      - entity: sensor.tradfri_remote_control_3
-      - entity: sensor.transmission_down_speed
-      - entity: sensor.transmission_up_speed
-      - entity: sensor.transmission_status
-      - entity: sensor.transmission_active_torrents
-      - entity: sensor.transmission_paused_torrents
-      - entity: sensor.transmission_total_torrents
-      - entity: sensor.transmission_completed_torrents
-      - entity: sensor.transmission_started_torrents
-      - entity: sun.sun
+      # - entity: binary_sensor.updater
+      # - entity: person.tom_erik
+      # - entity: sensor.time
+      # - entity: sensor.local_ip
+      # - entity: sensor.tradfri_remote_control_7
+      # - entity: sensor.tradfri_remote_control_2
+      # - entity: sensor.ved_dor
+      # - entity: sensor.ved_dor_2
+      # - entity: sensor.tradfri_remote_control_6
+      # - entity: sensor.tradfri_remote_control_3
+      # - entity: sensor.transmission_down_speed
+      # - entity: sensor.transmission_up_speed
+      # - entity: sensor.transmission_status
+      # - entity: sensor.transmission_active_torrents
+      # - entity: sensor.transmission_paused_torrents
+      # - entity: sensor.transmission_total_torrents
+      # - entity: sensor.transmission_completed_torrents
+      # - entity: sensor.transmission_started_torrents
+      # - entity: sun.sun
+
     cards:
 
       # - type: entities
@@ -60,20 +61,23 @@ views:
       #     - light.kokken_3
       #   title: Kitchen
 
-      - type: entities
-        entities:
-          - sensor.hp_officejet_pro_x451dw_printer
-          # - light.stue_spot
-          # - light.stue_spot_2
-          # - light.stue_spot_3
-          # - light.stue_spot_4
-          - sensor.skrivebord
-          - switch.media_corner_control_outlet
-          - switch.desk_control_outlet
-        title: Living Room
+      # - type: entities
+      #   entities:
+      #     # - sensor.hp_officejet_pro_x451dw_printer
+      #     # - light.stue_spot
+      #     # - light.stue_spot_2
+      #     # - light.stue_spot_3
+      #     # - light.stue_spot_4
+      #     # - sensor.skrivebord
+      #     # - switch.media_corner_control_outlet
+      #     # - switch.desk_control_outlet
+      #     # - media_player.chromecastaudio4176
+      #     # - media_player.projector
+      #   title: Living Room
 
       - type: media-control
         entity: media_player.projector
+
       - type: media-control
         entity: media_player.chromecastaudio4176
 
@@ -100,5 +104,9 @@ views:
       - type: weather-forecast
         entity: weather.jyllandsgade11
 
-      - type: button
-        entity: switch.flux_lights
+      - type: entities
+        entities:
+          - switch.flux_lights
+          - automation.dim_lights_at_sunset
+          - automation.wake_me_up_using_bedroom_lights
+        title: Automations
