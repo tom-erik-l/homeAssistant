@@ -1,3 +1,4 @@
+# Automation inspired by: https://community.home-assistant.io/t/flux-on-lights-that-are-off/27950/6
 - alias: "flux update lights"
   initial_state: true
   trigger:
