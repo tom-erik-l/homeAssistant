@@ -10,6 +10,7 @@
 !.vscode
 !*.json
 
+
 # Database
 home-assistant_v2.db*
 home-assistant.log
@@ -18,6 +19,7 @@ home-assistant.log
 .storage
 .cloud
 .google.token
+custom_components
 
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
 ip_bans.yaml
