@@ -1,21 +1,21 @@
-# Automation inspired by: https://community.home-assistant.io/t/flux-on-lights-that-are-off/27950/6
-- alias: "flux update lights"
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: light.badevaerelse_lys, light.gang_lys, light.hele_stue_lys, light.kokken_lys, light.sovevaerelse_lys, light.spisestue_lys, light.stue_lys
-      from: 'off'
-      to: 'on'
-    - platform: time_pattern
-      seconds: '/30'
-  condition:
-    - condition: state
-      entity_id: switch.flux_lights
-      state: 'on'
-  action:
-    - service: switch.flux_lights_update
-    # - service: system_log.write
-    #   data_template:
-    #     level: error
-    #     logger: my_error
-    #     message: "Triggered flux light automation"
+# # Automation inspired by: https://community.home-assistant.io/t/flux-on-lights-that-are-off/27950/6
+# - alias: "flux update lights"
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: light.badevaerelse_lys, light.gang_lys, light.hele_stue_lys, light.kokken_lys, light.sovevaerelse_lys, light.spisestue_lys, light.stue_lys
+#       from: 'off'
+#       to: 'on'
+#     - platform: time_pattern
+#       seconds: '/30'
+#   condition:
+#     - condition: state
+#       entity_id: switch.flux_lights
+#       state: 'on'
+#   action:
+#     - service: switch.flux_lights_update
+#     # - service: system_log.write
+#     #   data_template:
+#     #     level: error
+#     #     logger: my_error
+#     #     message: "Triggered flux light automation"

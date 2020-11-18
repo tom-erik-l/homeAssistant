@@ -15,6 +15,11 @@ logger:
   logs:
       my_error: error
 
+# Cicardian lighting, see doc at:
+# https://community.home-assistant.io/t/circadian-lighting-custom-component/61246
+circadian_lighting:
+  min_colortemp: 2000
+
 group: !include groups.yaml
 automation: !include_dir_merge_list automation/
 script: !include_dir_merge_named  script/
@@ -23,7 +28,17 @@ sensor: !include sensors.yaml
 light: !include light.yaml
 switch: !include fluxLight.yaml
 
-
+# See https://www.home-assistant.io/integrations/asuswrt/
+asuswrt:
+  host: "192.168.1.1"
+  username: admin
+  password: !secret asusWRTPassword
+  sensors:
+    - devices           # sensor.asuswrt_devices_connected
+    - upload            # sensor.asuswrt_download (unit_of_measurement: Gigabyte - Daily accumulation)
+    - download          # sensor.asuswrt_download_speed (unit_of_measurement: Mbit/s)
+    - upload_speed      # sensor.asuswrt_upload (unit_of_measurement: Gigabyte - Daily accumulation)
+    - download_speed    # sensor.asuswrt_upload_speed (unit_of_measurement: Mbit/s)
 
 lovelace:
   mode: yaml
