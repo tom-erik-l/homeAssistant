@@ -110,3 +110,8 @@ views:
           - automation.dim_lights_at_sunset
           - automation.wake_me_up_using_bedroom_lights
         title: Automations
+
+      - type: entities
+        entities:
+          - counter.stuecounter
+

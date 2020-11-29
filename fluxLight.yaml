@@ -27,4 +27,6 @@
     - light.spisestue_lys
     - light.stue_lys
   disable_brightness_adjust: False
+  min_brightness: 2
+  max_brightness: 99
   # Consider adding the sleep state, but need some sort of device / combination of devices to determine if sleeping
