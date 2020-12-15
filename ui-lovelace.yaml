@@ -106,7 +106,7 @@ views:
 
       - type: entities
         entities:
-          - switch.circadian_lighting_cicardian_lights
+          - switch.circadian_lighting_circardian_lights
           - automation.dim_lights_at_sunset
           - automation.wake_me_up_using_bedroom_lights
         title: Automations
@@ -114,4 +114,6 @@ views:
       - type: entities
         entities:
           - counter.stuecounter
+          - counter.koekkencounter
+
 

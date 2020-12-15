@@ -1,0 +1,74 @@
+input_boolean:
+  disableincrement: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
+    initial: "off"
+
+automation:
+  - id: hass_startup
+    alias: 'Hass startup'
+    trigger:
+    - platform: homeassistant
+      event: start
+    action:
+    - service: switch.turn_on
+      entity_id: switch.circadian_lighting_circardian_lights
+    - service: counter.reset
+      entity_id: counter.stuecounter
+
+  - alias: 'resetLightToggleCounter'
+    initial_state: "on"
+    trigger:
+    - platform: time_pattern
+      seconds: /10
+    action:
+    - service: counter.reset
+      entity_id: counter.stuecounter
+
+  - alias: "incrementStueCounter"
+    initial_state: "on"
+    trigger:
+    - platform: state
+      entity_id: light.stue_spot
+      from: "off"
+      to: "on"
+    condition:
+    - condition: state
+      entity_id: input_boolean.disableincrement
+      state: "off"
+    action:
+    - service: counter.increment
+      entity_id: counter.stuecounter
+
+  - alias: "toggleManualOverride"
+    initial_state: "on"
+    trigger:
+    - platform: numeric_state
+      entity_id: counter.stuecounter
+      above: 2
+      # below: 5
+    action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.disableincrement
+    - service: switch.toggle
+      entity_id: switch.circadian_lighting_circardian_lights
+    - service: light.turn_on
+      entity_id: light.hele_stue_lys
+    - service: counter.reset
+      entity_id: counter.stuecounter
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.disableincrement
+
+    - condition: state
+      entity_id: switch.circadian_lighting_circardian_lights
+      state: "off"
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.disableincrement
+    - service: light.turn_on
+      data:
+        entity_id: light.hele_stue_lys
+        transition: 2
+        # color_temp: 6000
+        brightness_pct: 100
+    - service: counter.reset
+      entity_id: counter.stuecounter
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.disableincrement

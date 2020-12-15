@@ -1,0 +1,22 @@
+# Cicardian lighting, see doc at:
+# https://community.home-assistant.io/t/circadian-lighting-custom-component/61246
+circadian_lighting:
+  min_colortemp: 1000
+  max_colortemp: 7000
+  sunrise_offset: "00:00:00"
+
+switch:
+  - platform: circadian_lighting
+    name: Circardian Lights
+    lights_ct:
+      - light.badevaerelse_lys
+      - light.gang_lys
+      # - light.hele_stue_lys
+      - light.kokken_lys
+      - light.sovevaerelse_lys
+      - light.spisestue_lys
+      - light.stue_lys
+    disable_brightness_adjust: False
+    min_brightness: 1
+    max_brightness: 100
+    # Consider adding the sleep state, but need some sort of device / combination of devices to determine if sleeping

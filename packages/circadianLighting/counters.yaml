@@ -1,0 +1,17 @@
+counter:
+  # https://www.home-assistant.io/integrations/counter/
+  stuecounter:
+    initial: 0
+    step: 1
+
+  sovevaerelsecounter:
+    initial: 0
+    step: 1
+
+  koekkencounter:
+    initial: 0
+    step: 1
+
+  badevaerelselsecounter:
+    initial: 0
+    step: 1

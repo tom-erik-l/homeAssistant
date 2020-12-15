@@ -15,13 +15,6 @@ logger:
   logs:
       my_error: error
 
-# Cicardian lighting, see doc at:
-# https://community.home-assistant.io/t/circadian-lighting-custom-component/61246
-circadian_lighting:
-  min_colortemp: 1000
-  max_colortemp: 7000
-  sunrise_offset: "00:00:00"
-
 group: !include groups.yaml
 automation: !include_dir_merge_list automation/
 script: !include_dir_merge_named  script/
@@ -50,110 +43,9 @@ lovelace:
 # - host: "192.168.1.20"
 
 
-# Wake up light stuff
-# see: https://www.wouterbulten.nl/blog/tech/custom-wake-up-light-with-home-assistant/
-input_boolean:
-  wakeup_enabled:
-    name: "Wake-up lights"
-    #initial: on
-    icon: mdi:theme-light-dark
-  wakeup_weekend:
-    name: "Enable Wake-up on weekends"
-    #initial: off # I disable the system on default on weekends
-    icon: mdi:calendar-blank
-  wakeup_test:
-    name: "Test Wake-up"
-    #initial: off # I disable the system on default on weekends
-    icon: mdi:calendar-blank
-
-input_datetime:
-  wakeup_time:
-    name: "Start lights at"
-    has_time: true
-    has_date: false
-
 homeassistant:
   packages:
-    lightpack:
-      counter:
-        # https://www.home-assistant.io/integrations/counter/
-        stuecounter:
-          initial: 0
-          step: 1
-
-      input_boolean:
-        disableincrement:
-          initial: "off"
-
-      automation:
-        - id: hass_startup
-          alias: 'Hass startup'
-          trigger:
-          - platform: homeassistant
-            event: start
-          action:
-          - service: switch.turn_on
-            entity_id: switch.circadian_lighting_cicardian_lights
-          - service: counter.reset
-            entity_id: counter.stuecounter
-
-        - alias: 'resetLightToggleCounter'
-          initial_state: "on"
-          trigger:
-          - platform: time_pattern
-            seconds: /10
-          action:
-          - service: counter.reset
-            entity_id: counter.stuecounter
-
-        - alias: "incrementStueCounter"
-          initial_state: "on"
-          trigger:
-          - platform: state
-            entity_id: light.stue_spot
-            from: "off"
-            to: "on"
-          condition:
-          - condition: state
-            entity_id: input_boolean.disableincrement
-            state: "off"
-          action:
-          - service: counter.increment
-            entity_id: counter.stuecounter
-
-        - alias: "toggleManualOverride"
-          initial_state: "on"
-          trigger:
-          - platform: numeric_state
-            entity_id: counter.stuecounter
-            above: 2
-            # below: 5
-          action:
-          - service: input_boolean.turn_on
-            entity_id: input_boolean.disableincrement
-          - service: switch.toggle
-            entity_id: switch.circadian_lighting_cicardian_lights
-          - service: light.turn_on
-            entity_id: light.hele_stue_lys
-          - service: counter.reset
-            entity_id: counter.stuecounter
-          - service: input_boolean.turn_off
-            entity_id: input_boolean.disableincrement
-
-          - condition: state
-            entity_id: switch.circadian_lighting_cicardian_lights
-            state: "off"
-          - service: input_boolean.turn_on
-            entity_id: input_boolean.disableincrement
-          - service: light.turn_on
-            data:
-              entity_id: light.hele_stue_lys
-              transition: 2
-              # color_temp: 6000
-              brightness_pct: 100
-          - service: counter.reset
-            entity_id: counter.stuecounter
-          - service: input_boolean.turn_off
-            entity_id: input_boolean.disableincrement
+    wakeuplights: !include_dir_merge_named packages/wakeUpLights
+    circadianlights: !include_dir_merge_named packages/circadianLighting
 
 
