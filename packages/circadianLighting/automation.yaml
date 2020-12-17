@@ -4,6 +4,7 @@ input_boolean:
 
 automation:
   - id: hass_startup
+    # Ensure that the Circadian Lights are enabled after rebooting HASS
     alias: 'Hass startup'
     trigger:
     - platform: homeassistant
@@ -15,6 +16,7 @@ automation:
       entity_id: counter.stuecounter
 
   - alias: 'resetLightToggleCounter'
+    # Reset the counter every 10 seconds
     initial_state: "on"
     trigger:
     - platform: time_pattern
@@ -24,6 +26,7 @@ automation:
       entity_id: counter.stuecounter
 
   - alias: "incrementStueCounter"
+    # Increment the light counter if a light switches from off to on IF the boolean "disableincrement" == "off"
     initial_state: "on"
     trigger:
     - platform: state
@@ -39,6 +42,8 @@ automation:
       entity_id: counter.stuecounter
 
   - alias: "toggleManualOverride"
+    # Enable manual override of Circadian lights IF counter > 2:
+    #
     initial_state: "on"
     trigger:
     - platform: numeric_state
@@ -46,29 +51,39 @@ automation:
       above: 2
       # below: 5
     action:
+    # Turn on boolean "disableincrement" to prevent additional toggles from increasing the counter
     - service: input_boolean.turn_on
       entity_id: input_boolean.disableincrement
+    # Toggle the Circadian lights
     - service: switch.toggle
       entity_id: switch.circadian_lighting_circardian_lights
-    - service: light.turn_on
-      entity_id: light.hele_stue_lys
+    # # Turn on the living room lights ??? Why
+    # - service: light.turn_on
+    #   entity_id: light.hele_stue_lys
+    # Reset the counter
     - service: counter.reset
       entity_id: counter.stuecounter
+    # Turn off boolean "disableincrement" to again allow additional toggles to increase the counter
     - service: input_boolean.turn_off
       entity_id: input_boolean.disableincrement
 
+    # If the Circadian lights are "off" then proceed to the additional conditions
     - condition: state
       entity_id: switch.circadian_lighting_circardian_lights
       state: "off"
+    # Turn on the boolean "disable increment" again to prevent next light turn on even to trigger the automation
     - service: input_boolean.turn_on
       entity_id: input_boolean.disableincrement
+    # Turn on the lights to full brightness
     - service: light.turn_on
       data:
         entity_id: light.hele_stue_lys
         transition: 2
         # color_temp: 6000
         brightness_pct: 100
+    # Ensure that the counter is reset (should not be necessary)
     - service: counter.reset
       entity_id: counter.stuecounter
+    # Turn off the boolean "disableincrement" again to allow firing the automation chain again
     - service: input_boolean.turn_off
       entity_id: input_boolean.disableincrement
