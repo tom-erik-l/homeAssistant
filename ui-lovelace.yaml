@@ -92,13 +92,13 @@ views:
 
       - type: entities
         entities:
-          - light.hele_stue_lys
-          - light.spisestue_lys
-          - light.stue_lys
-          - light.badevaerelse_lys
-          - light.gang_lys
-          - light.kokken_lys
-          - light.sovevaerelse_lys
+          - light.hele_stue
+          - light.spisestue
+          - light.stue
+          - light.badevaerelse
+          - light.gang
+          - light.kokken
+          - light.sovevaerelse
         title: Light
 
       - type: weather-forecast
@@ -106,14 +106,22 @@ views:
 
       - type: entities
         entities:
-          - switch.circadian_lighting_circardian_lights
+          - switch.circadian_lighting_stue
+          - switch.circadian_lighting_spisestue
+          - switch.circadian_lighting_kokken
+          - switch.circadian_lighting_sovevaerelse
+          - switch.circadian_lighting_badevaerelse
+          - switch.circadian_lighting_gang
           - automation.dim_lights_at_sunset
           - automation.wake_me_up_using_bedroom_lights
         title: Automations
 
       - type: entities
         entities:
-          - counter.stuecounter
-          - counter.koekkencounter
-
+          - counter.stue
+          - counter.spisestue
+          - counter.kokken
+          - counter.sovevaerelse
+          - counter.badevaerelse
+          - counter.gang
 

@@ -1,12 +1,12 @@
 - platform: group
-  name: Badeværelse lys
+  name: Badeværelse
   entities:
     - light.badevaerelse
     - light.badevaerelse_2
     - light.badevaerelse_3
 
 - platform: group
-  name: Stue lys
+  name: Stue
   entities:
     - light.stue_spot
     - light.stue_spot_2
@@ -14,7 +14,7 @@
     - light.stue_spot_4
 
 - platform: group
-  name: Spisestue lys
+  name: Spisestue
   entities:
     - light.spisestue_spot
     - light.spisestue_spot_2
@@ -23,34 +23,36 @@
     - light.spisebord
 
 - platform: group
-  name: Hele Stue lys
+  name: Hele Stue
   entities:
-    - light.stue_spot
-    - light.stue_spot_2
-    - light.stue_spot_3
-    - light.stue_spot_4
-    - light.spisestue_spot
-    - light.spisestue_spot_2
-    - light.spisestue_spot_3
-    - light.spisestue_spot_4
-    - light.spisebord
+    - light.spisestue
+    - light.stue
+    # - light.stue_spot
+    # - light.stue_spot_2
+    # - light.stue_spot_3
+    # - light.stue_spot_4
+    # - light.spisestue_spot
+    # - light.spisestue_spot_2
+    # - light.spisestue_spot_3
+    # - light.spisestue_spot_4
+    # - light.spisebord
 
 - platform: group
-  name: Køkken lys
+  name: Køkken
   entities:
     - light.kokken
     - light.kokken_3
     - light.kokken_2
 
 - platform: group
-  name: Soveværelse lys
+  name: Soveværelse
   entities:
     - light.sovevaerelse
     - light.sovevaerelse_2
     - light.sovevaerelse_3
 
 - platform: group
-  name: Gang lys
+  name: Gang
   entities:
     - light.gang
     - light.gang_2
