@@ -1,19 +1,31 @@
-input_boolean:
-  disableincrement: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
-    initial: "off"
-
 automation:
   - id: hass_startup
-    # Ensure that the Circadian Lights are enabled after rebooting HASS
     alias: 'Hass startup'
     trigger:
     - platform: homeassistant
       event: start
     action:
+    # Ensure that the Circadian Lights are enabled after rebooting HASS
     - service: switch.turn_on
-      entity_id: switch.circadian_lighting_circardian_lights
+      data:
+        entity_id:
+          - switch.circadian_lighting_badevaerelse
+          - switch.circadian_lighting_gang
+          - switch.circadian_lighting_kokken
+          - switch.circadian_lighting_sovevaerelse
+          - switch.circadian_lighting_spisestue
+          - switch.circadian_lighting_stue
+    # Ensure that all counters are reset after rebooting HASS
     - service: counter.reset
-      entity_id: counter.stuecounter
+      data:
+        entity_id:
+          - counter.stue
+          - counter.badevaerelselse
+          - counter.kokken
+          - counter.sovevaerelse
+          - counter.spisestue
+          - counter.gang
+          - counter.noop
 
   - alias: 'resetLightToggleCounter'
     # Reset the counter every 10 seconds
@@ -23,14 +35,26 @@ automation:
       seconds: /10
     action:
     - service: counter.reset
-      entity_id: counter.stuecounter
+      data:
+        entity_id:
+          - counter.stue
+          - counter.badevaerelselse
+          - counter.kokken
+          - counter.sovevaerelse
+          - counter.spisestue
 
-  - alias: "incrementStueCounter"
+  - alias: "incrementCounter"
     # Increment the light counter if a light switches from off to on IF the boolean "disableincrement" == "off"
     initial_state: "on"
     trigger:
     - platform: state
-      entity_id: light.stue_spot
+      entity_id:
+        - light.stue
+        - light.spisestue
+        - light.badevaerelse
+        - light.gang
+        - light.kokken
+        - light.sovevaerelse
       from: "off"
       to: "on"
     condition:
@@ -39,7 +63,24 @@ automation:
       state: "off"
     action:
     - service: counter.increment
-      entity_id: counter.stuecounter
+      data_template:
+        entity_id: >
+          {% if trigger.entity_id == 'light.stue' %}
+            counter.stue
+          {% elif trigger.entity_id == 'light.spisestue' %}
+            counter.spisestue
+          {% elif trigger.entity_id == 'light.badevaerelse' %}
+            counter.badevaerelse
+          {% elif trigger.entity_id == 'light.gang' %}
+            counter.gang
+          {% elif trigger.entity_id == 'light.kokken' %}
+            counter.kokken
+          {% elif trigger.entity_id == 'light.sovevaerelse' %}
+            counter.sovevaerelse
+          {% else %}
+            counter.noop
+          {% endif %}
+
 
   - alias: "toggleManualOverride"
     # Enable manual override of Circadian lights IF counter > 2:
@@ -47,7 +88,12 @@ automation:
     initial_state: "on"
     trigger:
     - platform: numeric_state
-      entity_id: counter.stuecounter
+      entity_id:
+      - counter.stue
+      - counter.badevaerelselse
+      - counter.kokken
+      - counter.sovevaerelse
+      - counter.spisestue
       above: 2
       # below: 5
     action:
@@ -56,20 +102,20 @@ automation:
       entity_id: input_boolean.disableincrement
     # Toggle the Circadian lights
     - service: switch.toggle
-      entity_id: switch.circadian_lighting_circardian_lights
+      entity_id: switch.circadian_lighting_stue
     # # Turn on the living room lights ??? Why
     # - service: light.turn_on
     #   entity_id: light.hele_stue_lys
     # Reset the counter
     - service: counter.reset
-      entity_id: counter.stuecounter
+      entity_id: counter.stue
     # Turn off boolean "disableincrement" to again allow additional toggles to increase the counter
     - service: input_boolean.turn_off
       entity_id: input_boolean.disableincrement
 
     # If the Circadian lights are "off" then proceed to the additional conditions
     - condition: state
-      entity_id: switch.circadian_lighting_circardian_lights
+      entity_id: switch.circadian_lighting_stue
       state: "off"
     # Turn on the boolean "disable increment" again to prevent next light turn on even to trigger the automation
     - service: input_boolean.turn_on
@@ -77,13 +123,19 @@ automation:
     # Turn on the lights to full brightness
     - service: light.turn_on
       data:
-        entity_id: light.hele_stue_lys
+        entity_id: light.hele_stue
         transition: 2
         # color_temp: 6000
         brightness_pct: 100
     # Ensure that the counter is reset (should not be necessary)
     - service: counter.reset
-      entity_id: counter.stuecounter
+      entity_id: counter.stue
     # Turn off the boolean "disableincrement" again to allow firing the automation chain again
     - service: input_boolean.turn_off
       entity_id: input_boolean.disableincrement
+
+# what is the scope in script? Are these only local, or are they global across script invocations?
+# To prevent the need for creating multiple input_booleans script mode is set to "queued" or "single"
+input_boolean:
+  disableincrement: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
+    initial: "off"

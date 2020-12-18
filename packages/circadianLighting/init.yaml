@@ -7,16 +7,53 @@ circadian_lighting:
 
 switch:
   - platform: circadian_lighting
-    name: Circardian Lights
+    name: Badevaerelse
     lights_ct:
-      - light.badevaerelse_lys
-      - light.gang_lys
-      # - light.hele_stue_lys
-      - light.kokken_lys
-      - light.sovevaerelse_lys
-      - light.spisestue_lys
-      - light.stue_lys
+      - light.badevaerelse
     disable_brightness_adjust: False
     min_brightness: 1
     max_brightness: 100
     # Consider adding the sleep state, but need some sort of device / combination of devices to determine if sleeping
+
+  - platform: circadian_lighting
+    name: Gang
+    lights_ct:
+      - light.gang
+    disable_brightness_adjust: False
+    min_brightness: 1
+    max_brightness: 100
+
+  - platform: circadian_lighting
+    name: Kokken
+    lights_ct:
+      - light.kokken
+    disable_brightness_adjust: False
+    min_brightness: 1
+    max_brightness: 100
+
+  - platform: circadian_lighting
+    name: Sovevaerelse
+    lights_ct:
+      - light.sovevaerelse
+    disable_brightness_adjust: False
+    min_brightness: 1
+    max_brightness: 100
+
+  - platform: circadian_lighting
+    name: Spisestue
+    lights_ct:
+      - light.spisestue
+    disable_brightness_adjust: False
+    min_brightness: 1
+    max_brightness: 100
+
+  - platform: circadian_lighting
+    name: Stue
+    lights_ct:
+      - light.stue
+    disable_brightness_adjust: False
+    min_brightness: 1
+    max_brightness: 100
+
+# group:
+#   name: Cir
