@@ -27,3 +27,9 @@ counter:
   noop:
     initial: 0
     step: 1
+
+# what is the scope in script / blueprint / automation? Are these only local, or are they global across script invocations?
+# To prevent the need for creating multiple input_booleans script mode is set to "queued" or "single"
+input_boolean:
+  disableincrement: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
+    initial: "off"
