@@ -101,39 +101,42 @@ automation:
         above: 2
 
     action:
+      # Turn on boolean "disableincrement" to prevent additional toggles from increasing the counter
+      - service: input_boolean.turn_on
+        data:
+          entity_id: "{{ disableincrementboolean }}"
+
       - choose:
+        # If the Circadian lights are "on" then turn them "off"
         - conditions:
-          # If the Circadian lights are "on" then turn them "off"
           - condition: template
             value_template: "{{ is_state(circardianswitch, 'on') }}"
           sequence:
             - service: switch.turn_off
               data:
                 entity_id: "{{ circardianswitch }}"
-              # Turn on boolean "disableincrement" to prevent additional toggles from increasing the counter
-            - service: input_boolean.turn_on
-              data:
-                entity_id: "{{ disableincrementboolean }}"
             - service: light.turn_on
               data:
                 entity_id: "{{ lights }}"
                 transition: 2
                 # color_temp: 6000
                 brightness_pct: 100
-            - service: counter.reset
-              data:
-                entity_id: "{{ counter }}"
-            # Turn off boolean "disableincrement" to again allow additional toggles to increase the counter
-            - service: input_boolean.turn_off
-              data:
-                entity_id: "{{ disableincrementboolean }}"
 
+        # If the Circadian lights are "off" then turn them "on"
         - conditions:
-          # If the Circadian lights are "off" then turn them "on"
           - condition: template
             value_template: "{{ is_state(circardianswitch, 'off') }}"
           sequence:
             - service: switch.turn_on
               data:
                 entity_id: "{{ circardianswitch }}"
+
+
+      - service: counter.reset
+        data:
+          entity_id: "{{ counter }}"
+      # Turn on boolean "disableincrement" to prevent additional toggles from increasing the counter
+      - service: input_boolean.turn_on
+        data:
+          entity_id: "{{ disableincrementboolean }}"
 
