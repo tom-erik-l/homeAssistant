@@ -89,47 +89,51 @@ automation:
     # Enable manual override of Circadian lights IF counter > 2:
     initial_state: "on"
 
-    trigger:
-    - platform: numeric_state
-      <<: *counters
-      above: 2
-      # below: 5
+    variables:
+      disableincrementboolean: input_boolean.disableincrement
+      counter: counter.stue
+      circardianswitch: switch.circadian_lighting_stue
+      lights: light.hele_stue
 
-    # variables:
-      # disableincrementboolean: input_boolean.disableincrement # Missing feature in HA Core, cannot do "state" objects as variables - See https://github.com/home-assistant/core/issues/41288
+    trigger:
+      - platform: numeric_state
+        entity_id: counter.stue
+        above: 2
 
     action:
       - choose:
         - conditions:
           # If the Circadian lights are "on" then turn them "off"
-          - condition: state
-            entity_id: switch.circadian_lighting_stue
-            state: "on"
+          - condition: template
+            value_template: "{{ is_state(circardianswitch, 'on') }}"
           sequence:
             - service: switch.turn_off
-              entity_id: switch.circadian_lighting_stue
+              data:
+                entity_id: "{{ circardianswitch }}"
               # Turn on boolean "disableincrement" to prevent additional toggles from increasing the counter
             - service: input_boolean.turn_on
-              entity_id: input_boolean.disableincrement
+              data:
+                entity_id: "{{ disableincrementboolean }}"
             - service: light.turn_on
               data:
-                entity_id: light.hele_stue
+                entity_id: "{{ lights }}"
                 transition: 2
                 # color_temp: 6000
                 brightness_pct: 100
             - service: counter.reset
-              entity_id: counter.stue
+              data:
+                entity_id: "{{ counter }}"
             # Turn off boolean "disableincrement" to again allow additional toggles to increase the counter
             - service: input_boolean.turn_off
-              # entity_id: "{{ disableincrementboolean }}" # Missing feature in HA Core, cannot do "state" objects as variables - See https://github.com/home-assistant/core/issues/41288
-              entity_id: input_boolean.disableincrement
+              data:
+                entity_id: "{{ disableincrementboolean }}"
 
         - conditions:
           # If the Circadian lights are "off" then turn them "on"
-          - condition: state
-            entity_id: switch.circadian_lighting_stue
-            state: "off"
+          - condition: template
+            value_template: "{{ is_state(circardianswitch, 'off') }}"
           sequence:
             - service: switch.turn_on
-              entity_id: switch.circadian_lighting_stue
+              data:
+                entity_id: "{{ circardianswitch }}"
 
