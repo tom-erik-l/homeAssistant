@@ -1,3 +1,34 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      counters: &counters
+        entity_id:
+          - counter.stue
+          - counter.spisestue
+          - counter.kokken
+          - counter.sovevaerelse
+          - counter.badevaerelselse
+          - counter.gang
+          - counter.noop
+
+      lights: &lights
+        entity_id:
+          - light.stue
+          - light.spisestue
+          - light.kokken
+          - light.sovevaerelse
+          - light.badevaerelse
+          - light.gang
+
+      switches: &switches
+        entity_id:
+          - switch.circadian_lighting_stue
+          - switch.circadian_lighting_spisestue
+          - switch.circadian_lighting_kokken
+          - switch.circadian_lighting_sovevaerelse
+          - switch.circadian_lighting_badevaerelse
+          - switch.circadian_lighting_gang
+
 automation:
   - id: hass_startup
     alias: 'Hass startup'
@@ -7,25 +38,10 @@ automation:
     action:
     # Ensure that the Circadian Lights are enabled after rebooting HASS
     - service: switch.turn_on
-      data:
-        entity_id:
-          - switch.circadian_lighting_badevaerelse
-          - switch.circadian_lighting_gang
-          - switch.circadian_lighting_kokken
-          - switch.circadian_lighting_sovevaerelse
-          - switch.circadian_lighting_spisestue
-          - switch.circadian_lighting_stue
+      data: *switches
     # Ensure that all counters are reset after rebooting HASS
     - service: counter.reset
-      data:
-        entity_id:
-          - counter.stue
-          - counter.badevaerelselse
-          - counter.kokken
-          - counter.sovevaerelse
-          - counter.spisestue
-          - counter.gang
-          - counter.noop
+      data: *counters
 
   - alias: 'resetLightToggleCounter'
     # Reset the counter every 10 seconds
@@ -35,26 +51,14 @@ automation:
       seconds: /10
     action:
     - service: counter.reset
-      data:
-        entity_id:
-          - counter.stue
-          - counter.badevaerelselse
-          - counter.kokken
-          - counter.sovevaerelse
-          - counter.spisestue
+      data: *counters
 
   - alias: "incrementCounter"
     # Increment the light counter if a light switches from off to on IF the boolean "disableincrement" == "off"
     initial_state: "on"
     trigger:
     - platform: state
-      entity_id:
-        - light.stue
-        - light.spisestue
-        - light.badevaerelse
-        - light.gang
-        - light.kokken
-        - light.sovevaerelse
+      <<: *lights
       from: "off"
       to: "on"
     condition:
@@ -88,12 +92,7 @@ automation:
     initial_state: "on"
     trigger:
     - platform: numeric_state
-      entity_id:
-      - counter.stue
-      - counter.badevaerelselse
-      - counter.kokken
-      - counter.sovevaerelse
-      - counter.spisestue
+      <<: *counters
       above: 2
       # below: 5
     action:
