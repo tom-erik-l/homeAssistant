@@ -1,0 +1,86 @@
+blueprint:
+  name: Toggle Circadian Lights
+  description: Toggle circadian lights depending on a rapid number of state changes (turn off -> turn on cycles). Must be paired with counter object that keeps track of the cycles.
+  domain: automation
+  input:
+    disableincrementboolean:
+      name: Disable Increment Boolean
+      description: Boolean needed to prevent increments of the counter when the lights are turned on from triggering a new sequence (in case they have been reset in the mean time, could also add this condition to the reset automation, but that could create an interlock if things get out of sync)
+      selector:
+        entity:
+          domain: input_boolean
+    counter:
+      name: Toggle Cycle Counter
+      description: Counter to keep track of the number of off -> on cycles of a light group.
+      selector:
+        entity:
+          domain: counter
+    circardianswitch:
+      name: Circadian Lighting Switch
+      description: The circadian lighting switch to toggle on or off
+      selector:
+        entity:
+          domain: switch
+    lights:
+      name: Light Group
+      description: The light group to control manual override on (should be the same the circadian lighting switch)
+      selector:
+        entity:
+          domain: light
+    toggles:
+      name: Number of cycles
+      description: Turn on the lights when above the number of cycles
+      selector:
+        number:
+          min: 1
+          max: 5
+
+variables:
+  disableincrementboolean: !input disableincrementboolean
+  counter: !input counter
+  circardianswitch: !input circardianswitch
+  lights: !input lights
+  toggles: !input toggles
+
+trigger:
+  - platform: numeric_state
+    entity_id: !input counter
+    above: !input toggles
+
+action:
+  # Turn on boolean "disableincrement" to prevent additional toggles from increasing the counter
+  - service: input_boolean.turn_on
+    data:
+      entity_id: "{{ disableincrementboolean }}"
+
+  - choose:
+    # If the Circadian lights are "on" then turn them "off"
+    - conditions:
+      - condition: template
+        value_template: "{{ is_state(circardianswitch, 'on') }}"
+      sequence:
+        - service: switch.turn_off
+          data:
+            entity_id: "{{ circardianswitch }}"
+        - service: light.turn_on
+          data:
+            entity_id: "{{ lights }}"
+            transition: 2
+            # color_temp: 6000
+            brightness_pct: 100
+    # If the Circadian lights are "off" then turn them "on"
+    - conditions:
+      - condition: template
+        value_template: "{{ is_state(circardianswitch, 'off') }}"
+      sequence:
+        - service: switch.turn_on
+          data:
+            entity_id: "{{ circardianswitch }}"
+
+  - service: counter.reset
+    data:
+      entity_id: "{{ counter }}"
+  # Turn off boolean "disableincrement" to again allow additional toggles to increase the counter
+  - service: input_boolean.turn_off
+    data:
+      entity_id: "{{ disableincrementboolean }}"

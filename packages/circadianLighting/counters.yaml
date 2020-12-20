@@ -3,27 +3,21 @@ counter:
   stue:
     initial: 0
     step: 1
-
   spisestue:
     initial: 0
     step: 1
-
   sovevaerelse:
     initial: 0
     step: 1
-
   kokken:
     initial: 0
     step: 1
-
   badevaerelse:
     initial: 0
     step: 1
-
   gang:
     initial: 0
     step: 1
-
   noop:
     initial: 0
     step: 1
@@ -32,4 +26,16 @@ counter:
 # To prevent the need for creating multiple input_booleans script mode is set to "queued" or "single"
 input_boolean:
   disableincrement: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
+    initial: "off"
+  disableincrementstue: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
+    initial: "off"
+  disableincrementspisestue: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
+    initial: "off"
+  disableincrementkokken: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
+    initial: "off"
+  disableincrementsovevaerelse: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
+    initial: "off"
+  disableincrementbadevaerelse: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
+    initial: "off"
+  disableincrementgang: #Internal switch for the automation to trigger -> temporarily disable the incrementation of lights turning off / on
     initial: "off"

@@ -85,58 +85,74 @@ automation:
             counter.noop
           {% endif %}
 
-  - alias: "toggleManualOverride"
+  - alias: "Stue: Toggle Manual Override"
     # Enable manual override of Circadian lights IF counter > 2:
     initial_state: "on"
+    use_blueprint:
+      path: circadianLightning/toggle.yaml
+      input:
+        toggles: 2
+        disableincrementboolean: input_boolean.disableincrement
+        counter: counter.stue
+        circardianswitch: switch.circadian_lighting_stue
+        lights: light.hele_stue
 
-    variables:
-      disableincrementboolean: input_boolean.disableincrement
-      counter: counter.stue
-      circardianswitch: switch.circadian_lighting_stue
-      lights: light.hele_stue
+  - alias: "Spisestue: Toggle Manual Override"
+    # Enable manual override of Circadian lights IF counter > 2:
+    initial_state: "on"
+    use_blueprint:
+      path: circadianLightning/toggle.yaml
+      input:
+        toggles: 2
+        disableincrementboolean: input_boolean.disableincrement
+        counter: counter.stue
+        circardianswitch: switch.circadian_lighting_spisestue
+        lights: light.hele_spisestue
 
-    trigger:
-      - platform: numeric_state
-        entity_id: counter.stue
-        above: 2
+  - alias: "Køkken: Toggle Manual Override"
+    # Enable manual override of Circadian lights IF counter > 2:
+    initial_state: "on"
+    use_blueprint:
+      path: circadianLightning/toggle.yaml
+      input:
+        toggles: 2
+        disableincrementboolean: input_boolean.disableincrement
+        counter: counter.stue
+        circardianswitch: switch.circadian_lighting_kokken
+        lights: light.hele_kokken
 
-    action:
-      # Turn on boolean "disableincrement" to prevent additional toggles from increasing the counter
-      - service: input_boolean.turn_on
-        data:
-          entity_id: "{{ disableincrementboolean }}"
+  - alias: "Soveværelse: Toggle Manual Override"
+    # Enable manual override of Circadian lights IF counter > 2:
+    initial_state: "on"
+    use_blueprint:
+      path: circadianLightning/toggle.yaml
+      input:
+        toggles: 2
+        disableincrementboolean: input_boolean.disableincrement
+        counter: counter.stue
+        circardianswitch: switch.circadian_lighting_sovevaerelse
+        lights: light.hele_sovevaerelse
 
-      - choose:
-        # If the Circadian lights are "on" then turn them "off"
-        - conditions:
-          - condition: template
-            value_template: "{{ is_state(circardianswitch, 'on') }}"
-          sequence:
-            - service: switch.turn_off
-              data:
-                entity_id: "{{ circardianswitch }}"
-            - service: light.turn_on
-              data:
-                entity_id: "{{ lights }}"
-                transition: 2
-                # color_temp: 6000
-                brightness_pct: 100
+  - alias: "Badeværelse: Toggle Manual Override"
+    # Enable manual override of Circadian lights IF counter > 2:
+    initial_state: "on"
+    use_blueprint:
+      path: circadianLightning/toggle.yaml
+      input:
+        toggles: 2
+        disableincrementboolean: input_boolean.disableincrement
+        counter: counter.stue
+        circardianswitch: switch.circadian_lighting_badevaerelse
+        lights: light.hele_badevaerelse
 
-        # If the Circadian lights are "off" then turn them "on"
-        - conditions:
-          - condition: template
-            value_template: "{{ is_state(circardianswitch, 'off') }}"
-          sequence:
-            - service: switch.turn_on
-              data:
-                entity_id: "{{ circardianswitch }}"
-
-
-      - service: counter.reset
-        data:
-          entity_id: "{{ counter }}"
-      # Turn on boolean "disableincrement" to prevent additional toggles from increasing the counter
-      - service: input_boolean.turn_on
-        data:
-          entity_id: "{{ disableincrementboolean }}"
-
+  - alias: "Gang: Toggle Manual Override"
+    # Enable manual override of Circadian lights IF counter > 2:
+    initial_state: "on"
+    use_blueprint:
+      path: circadianLightning/toggle.yaml
+      input:
+        toggles: 2
+        disableincrementboolean: input_boolean.disableincrement
+        counter: counter.stue
+        circardianswitch: switch.circadian_lighting_gang
+        lights: light.hele_gang
