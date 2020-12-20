@@ -85,7 +85,6 @@ automation:
             counter.noop
           {% endif %}
 
-
   - alias: "toggleManualOverride"
     # Enable manual override of Circadian lights IF counter > 2:
     initial_state: "on"
@@ -97,10 +96,10 @@ automation:
       # below: 5
 
     # variables:
+      # disableincrementboolean: input_boolean.disableincrement # Missing feature in HA Core, cannot do "state" objects as variables - See https://github.com/home-assistant/core/issues/41288
 
     action:
       - choose:
-
         - conditions:
           # If the Circadian lights are "on" then turn them "off"
           - condition: state
@@ -122,6 +121,7 @@ automation:
               entity_id: counter.stue
             # Turn off boolean "disableincrement" to again allow additional toggles to increase the counter
             - service: input_boolean.turn_off
+              # entity_id: "{{ disableincrementboolean }}" # Missing feature in HA Core, cannot do "state" objects as variables - See https://github.com/home-assistant/core/issues/41288
               entity_id: input_boolean.disableincrement
 
         - conditions:
@@ -132,5 +132,4 @@ automation:
           sequence:
             - service: switch.turn_on
               entity_id: switch.circadian_lighting_stue
-
 
