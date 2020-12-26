@@ -7,18 +7,18 @@ homeassistant:
           - counter.spisestue
           - counter.kokken
           - counter.sovevaerelse
-          - counter.badevaerelselse
+          - counter.badevaerelse
           - counter.gang
           - counter.noop
 
       lights: &lights
         entity_id:
-          - light.stue
-          - light.spisestue
-          - light.kokken
-          - light.sovevaerelse
-          - light.badevaerelse
-          - light.gang
+          - light.grp_stue
+          - light.grp_spisestue
+          - light.grp_kokken
+          - light.grp_sovevaerelse
+          - light.grp_badevaerelse
+          - light.grp_gang
 
       switches: &switches
         entity_id:
@@ -28,6 +28,16 @@ homeassistant:
           - switch.circadian_lighting_sovevaerelse
           - switch.circadian_lighting_badevaerelse
           - switch.circadian_lighting_gang
+
+      booleans: &booleans
+        entity_id:
+          - input_boolean.disableincrement
+          - input_boolean.disableincrementstue
+          - input_boolean.disableincrementspisestue
+          - input_boolean.disableincrementkokken
+          - input_boolean.disableincrementsovevaerelse
+          - input_boolean.disableincrementbadevaerelse
+          - input_boolean.disableincrementgang
 
 automation:
   - id: hass_startup
@@ -42,6 +52,9 @@ automation:
     # Ensure that all counters are reset after rebooting HASS
     - service: counter.reset
       data: *counters
+    # Ensure that the Disable Increment booleans are turned off after rebooting HASS
+    - service: input_boolean.turn_off
+      data: *booleans
 
   - alias: 'resetLightToggleCounter'
     # Reset the counter every 10 seconds
@@ -69,17 +82,17 @@ automation:
     - service: counter.increment
       data_template:
         entity_id: >
-          {% if trigger.entity_id == 'light.stue' %}
+          {% if trigger.entity_id == 'light.grp_stue' %}
             counter.stue
-          {% elif trigger.entity_id == 'light.spisestue' %}
+          {% elif trigger.entity_id == 'light.grp_spisestue' %}
             counter.spisestue
-          {% elif trigger.entity_id == 'light.badevaerelse' %}
+          {% elif trigger.entity_id == 'light.grp_badevaerelse' %}
             counter.badevaerelse
-          {% elif trigger.entity_id == 'light.gang' %}
+          {% elif trigger.entity_id == 'light.grp_gang' %}
             counter.gang
-          {% elif trigger.entity_id == 'light.kokken' %}
+          {% elif trigger.entity_id == 'light.grp_kokken' %}
             counter.kokken
-          {% elif trigger.entity_id == 'light.sovevaerelse' %}
+          {% elif trigger.entity_id == 'light.grp_sovevaerelse' %}
             counter.sovevaerelse
           {% else %}
             counter.noop
@@ -92,10 +105,10 @@ automation:
       path: circadianLightning/toggle.yaml
       input:
         toggles: 2
-        disableincrementboolean: input_boolean.disableincrement
+        disableincrementboolean: input_boolean.disableincrementstue
         counter: counter.stue
         circardianswitch: switch.circadian_lighting_stue
-        lights: light.hele_stue
+        lights: light.grp_hele_stue
 
   - alias: "Spisestue: Toggle Manual Override"
     # Enable manual override of Circadian lights IF counter > 2:
@@ -104,10 +117,10 @@ automation:
       path: circadianLightning/toggle.yaml
       input:
         toggles: 2
-        disableincrementboolean: input_boolean.disableincrement
-        counter: counter.stue
+        disableincrementboolean: input_boolean.disableincrementspisestue
+        counter: counter.spisestue
         circardianswitch: switch.circadian_lighting_spisestue
-        lights: light.hele_spisestue
+        lights: light.grp_spisestue
 
   - alias: "Køkken: Toggle Manual Override"
     # Enable manual override of Circadian lights IF counter > 2:
@@ -116,10 +129,10 @@ automation:
       path: circadianLightning/toggle.yaml
       input:
         toggles: 2
-        disableincrementboolean: input_boolean.disableincrement
-        counter: counter.stue
+        disableincrementboolean: input_boolean.disableincrementkokken
+        counter: counter.kokken
         circardianswitch: switch.circadian_lighting_kokken
-        lights: light.hele_kokken
+        lights: light.grp_kokken
 
   - alias: "Soveværelse: Toggle Manual Override"
     # Enable manual override of Circadian lights IF counter > 2:
@@ -128,10 +141,10 @@ automation:
       path: circadianLightning/toggle.yaml
       input:
         toggles: 2
-        disableincrementboolean: input_boolean.disableincrement
-        counter: counter.stue
+        disableincrementboolean: input_boolean.disableincrementsovevaerelse
+        counter: counter.sovevaerelse
         circardianswitch: switch.circadian_lighting_sovevaerelse
-        lights: light.hele_sovevaerelse
+        lights: light.sovevaerelse
 
   - alias: "Badeværelse: Toggle Manual Override"
     # Enable manual override of Circadian lights IF counter > 2:
@@ -140,10 +153,10 @@ automation:
       path: circadianLightning/toggle.yaml
       input:
         toggles: 2
-        disableincrementboolean: input_boolean.disableincrement
-        counter: counter.stue
+        disableincrementboolean: input_boolean.disableincrementbadevaerelse
+        counter: counter.badevaerelse
         circardianswitch: switch.circadian_lighting_badevaerelse
-        lights: light.hele_badevaerelse
+        lights: light.grp_badevaerelse
 
   - alias: "Gang: Toggle Manual Override"
     # Enable manual override of Circadian lights IF counter > 2:
@@ -152,7 +165,7 @@ automation:
       path: circadianLightning/toggle.yaml
       input:
         toggles: 2
-        disableincrementboolean: input_boolean.disableincrement
-        counter: counter.stue
+        disableincrementboolean: input_boolean.disableincrementgang
+        counter: counter.gang
         circardianswitch: switch.circadian_lighting_gang
-        lights: light.hele_gang
+        lights: light.grp_gang

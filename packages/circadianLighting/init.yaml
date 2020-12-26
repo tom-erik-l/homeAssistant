@@ -9,7 +9,7 @@ switch:
   - platform: circadian_lighting
     name: Badevaerelse
     lights_ct:
-      - light.badevaerelse
+      - light.grp_badevaerelse
     disable_brightness_adjust: False
     min_brightness: 1
     max_brightness: 100
@@ -18,7 +18,7 @@ switch:
   - platform: circadian_lighting
     name: Gang
     lights_ct:
-      - light.gang
+      - light.grp_gang
     disable_brightness_adjust: False
     min_brightness: 1
     max_brightness: 100
@@ -26,7 +26,7 @@ switch:
   - platform: circadian_lighting
     name: Kokken
     lights_ct:
-      - light.kokken
+      - light.grp_kokken
     disable_brightness_adjust: False
     min_brightness: 1
     max_brightness: 100
@@ -34,7 +34,7 @@ switch:
   - platform: circadian_lighting
     name: Sovevaerelse
     lights_ct:
-      - light.sovevaerelse
+      - light.grp_sovevaerelse
     disable_brightness_adjust: False
     min_brightness: 1
     max_brightness: 100
@@ -42,7 +42,7 @@ switch:
   - platform: circadian_lighting
     name: Spisestue
     lights_ct:
-      - light.spisestue
+      - light.grp_spisestue
     disable_brightness_adjust: False
     min_brightness: 1
     max_brightness: 100
@@ -50,7 +50,7 @@ switch:
   - platform: circadian_lighting
     name: Stue
     lights_ct:
-      - light.stue
+      - light.grp_stue
     disable_brightness_adjust: False
     min_brightness: 1
     max_brightness: 100

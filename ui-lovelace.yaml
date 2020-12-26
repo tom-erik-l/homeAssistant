@@ -92,13 +92,13 @@ views:
 
       - type: entities
         entities:
-          - light.hele_stue
-          - light.spisestue
-          - light.stue
-          - light.badevaerelse
-          - light.gang
-          - light.kokken
-          - light.sovevaerelse
+          - light.grp_hele_stue
+          - light.grp_spisestue
+          - light.grp_stue
+          - light.grp_badevaerelse
+          - light.grp_gang
+          - light.grp_kokken
+          - light.grp_sovevaerelse
         title: Light
 
       - type: weather-forecast
