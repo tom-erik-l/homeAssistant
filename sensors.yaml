@@ -1,4 +1,4 @@
-# sensors.yaml
-- platform: time_date
-  display_options:
-    - 'time'
+# # sensors.yaml
+# - platform: time_date
+#   display_options:
+#     - 'time'

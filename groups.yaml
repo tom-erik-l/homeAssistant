@@ -1,10 +1,10 @@
 
-# Wake up light stuff
-# see: https://www.wouterbulten.nl/blog/tech/custom-wake-up-light-with-home-assistant/
-alarm_clock:
-  name: "Wake-up Lights"
-  entities: # Add all entities here that should be part of the widget
-    - input_datetime.wakeup_time
-    - input_boolean.wakeup_enabled
-    - input_boolean.wakeup_weekend
-    - input_boolean.wakeup_test
+# # Wake up light stuff
+# # see: https://www.wouterbulten.nl/blog/tech/custom-wake-up-light-with-home-assistant/
+# alarm_clock:
+#   name: "Wake-up Lights"
+#   entities: # Add all entities here that should be part of the widget
+#     - input_datetime.wakeup_time
+#     - input_boolean.wakeup_enabled
+#     - input_boolean.wakeup_weekend
+#     - input_boolean.wakeup_test

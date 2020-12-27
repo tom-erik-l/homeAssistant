@@ -83,15 +83,6 @@ views:
 
       - type: entities
         entities:
-          - input_datetime.wakeup_time
-          - input_boolean.wakeup_enabled
-          - input_boolean.wakeup_weekend
-          - input_boolean.wakeup_test
-        title: Wake-up Lights
-        show_header_toggle: true
-
-      - type: entities
-        entities:
           - light.grp_hele_stue
           - light.grp_spisestue
           - light.grp_stue
@@ -113,7 +104,6 @@ views:
           - switch.circadian_lighting_badevaerelse
           - switch.circadian_lighting_gang
           - automation.dim_lights_at_sunset
-          - automation.wake_me_up_using_bedroom_lights
         title: Automations
 
       - type: entities
@@ -125,3 +115,11 @@ views:
           - counter.badevaerelse
           - counter.gang
 
+      - type: entities
+        entities:
+          - sensor.nextalarm
+          - automation.wake_up_lights_gang
+          - automation.wake_up_lights_bedroom_1
+          - automation.wake_up_lights_bedroom_2
+        title: Wake-up Lights
+        show_header_toggle: true

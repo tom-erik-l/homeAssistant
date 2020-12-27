@@ -1,0 +1,66 @@
+automation:
+  # - alias: "Turn off wake up lights"
+  #   trigger: []
+  #   action:
+  #     - service: automation.turn_off
+  #       data:
+  #         entity_id:
+  #           - automation.wake_up_lights_gang
+  #           - automation.wake_up_lights_bedroom_1
+  #           - automation.wake_up_lights_bedroom_2
+
+
+  - alias: "Wake up lights: Gang"
+    initial_state: "on"
+    use_blueprint:
+      path: wakeUpLights/wake-up-light-alarm-with-sunrise-effect.yaml
+      input:
+        light_entity: light.gang
+        timestamp_sensor: sensor.nextAlarm_pre10
+        sunrise_duration: 20
+        pre_sunrise_actions:
+          - service: switch.turn_off
+            data:
+              entity_id:
+                - switch.circadian_lighting_gang
+                - switch.circadian_lighting_sovevaerelse
+        post_sunrise_actions: []
+
+
+  - alias: "Wake up lights: Bedroom 1"
+    initial_state: "on"
+    use_blueprint:
+      path: wakeUpLights/wake-up-light-alarm-with-sunrise-effect.yaml
+      input:
+        light_entity: light.sovevaerelse
+        timestamp_sensor: sensor.nextAlarm_pre5
+        sunrise_duration: 20
+        pre_sunrise_actions: []
+        post_sunrise_actions: []
+
+  - alias: "Wake up lights: Bedroom 2"
+    initial_state: "on"
+    use_blueprint:
+      path: wakeUpLights/wake-up-light-alarm-with-sunrise-effect.yaml
+      input:
+        light_entity: light.sovevaerelse_2
+        timestamp_sensor: sensor.nextAlarm
+        sunrise_duration: 20
+        pre_sunrise_actions: []
+        post_sunrise_actions: []
+
+  - alias: "Wake up lights: Bedroom 3"
+    initial_state: "on"
+    use_blueprint:
+      path: wakeUpLights/wake-up-light-alarm-with-sunrise-effect.yaml
+      input:
+        light_entity: light.sovevaerelse_3
+        timestamp_sensor: sensor.nextAlarm
+        sunrise_duration: 20
+        pre_sunrise_actions: []
+        post_sunrise_actions:
+        - service: switch.turn_on
+          data:
+            entity_id:
+              - switch.circadian_lighting_gang
+              - switch.circadian_lighting_sovevaerelse

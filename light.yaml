@@ -25,8 +25,8 @@
 - platform: group
   name: grp Hele Stue
   entities:
-    - light.spisestue
-    - light.stue
+    - light.grp_spisestue
+    - light.grp_stue
     # - light.stue_spot
     # - light.stue_spot_2
     # - light.stue_spot_3
