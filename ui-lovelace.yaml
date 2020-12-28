@@ -79,7 +79,13 @@ views:
         entity: media_player.projector
 
       - type: media-control
+        entity: media_player.plex_plex_cast_chromecast_3
+
+      - type: media-control
         entity: media_player.chromecastaudio4176
+
+      - type: media-control
+        entity: media_player.plex_plex_cast_chromecast
 
       - type: entities
         entities:

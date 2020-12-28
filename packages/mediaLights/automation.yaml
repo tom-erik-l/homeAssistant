@@ -1,0 +1,27 @@
+automation:
+  - alias: Turn off lights when playing movie
+    trigger:
+    - platform: state
+      entity_id: media_player.plex_plex_cast_chromecast_3
+      to: "playing"
+    action:
+    - service: light.turn_off
+      data:
+        entity_id: light.grp_hele_stue
+        transition: 2
+
+  - alias: Turn on lights when pausing movie
+    trigger:
+    - platform: state
+      entity_id: media_player.plex_plex_cast_chromecast_3
+      from: "playing"
+      to: "paused"
+    action:
+    - service: light.turn_on
+      data:
+        entity_id: light.grp_hele_stue
+        transition: 2
+      # states:
+      # playing
+      # paused
+      # unavailable

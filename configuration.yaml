@@ -46,5 +46,6 @@ homeassistant:
   packages:
     wakeuplights: !include_dir_merge_named packages/wakeUpLights
     circadianlights: !include_dir_merge_named packages/circadianLighting
+    medialights: !include_dir_merge_named packages/mediaLights
 
 
