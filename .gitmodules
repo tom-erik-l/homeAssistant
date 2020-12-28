@@ -1,0 +1,3 @@
+[submodule "blueprints/automation/wakeUpLights"]
+	path = blueprints/automation/wakeUpLights
+	url = https://gist.github.com/3191262c06936377fb136ae4c367297c.git
