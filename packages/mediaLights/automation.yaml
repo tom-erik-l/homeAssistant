@@ -7,7 +7,12 @@ automation:
     action:
     - service: light.turn_off
       data:
-        entity_id: light.grp_hele_stue
+        entity_id:
+          - light.grp_hele_stue
+          - light.grp_gang
+          - light.grp_kokken
+          - light.grp_badevaerelse
+          - light.grp_sovevaerelse
         transition: 2
 
   - alias: Turn on lights when pausing movie
@@ -19,7 +24,11 @@ automation:
     action:
     - service: light.turn_on
       data:
-        entity_id: light.grp_hele_stue
+        entity_id:
+          - light.grp_hele_stue
+          - light.grp_gang
+          - light.grp_kokken
+          - light.grp_badevaerelse
         transition: 2
       # states:
       # playing
