@@ -109,7 +109,6 @@ views:
           - switch.circadian_lighting_sovevaerelse
           - switch.circadian_lighting_badevaerelse
           - switch.circadian_lighting_gang
-          - automation.dim_lights_at_sunset
         title: Automations
 
       - type: entities
