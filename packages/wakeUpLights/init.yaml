@@ -10,24 +10,24 @@ sensor:
       # Conversion to timestamp_local: https://community.home-assistant.io/t/trouble-with-strptime-addition-subtraction/19412
       # Learning - Convert to float first: https://community.home-assistant.io/t/timestamp-convertion-time-difference/210514/3
       nextalarm:
-        # device_class: timestamp
+        device_class: timestamp
         friendly_name: Next Alarm on Tom-Erik's P20 Pro
         value_template: >
           {% if ( states( 'sensor.tom_erik_s_p20_pro_next_alarm' ) ) %}
-            "{{ as_timestamp(states( 'sensor.tom_erik_s_p20_pro_next_alarm' )) | float | timestamp_local }}"
+            {{ as_timestamp(states( 'sensor.tom_erik_s_p20_pro_next_alarm' )) | float | timestamp_local }}
           {% endif %}
 
 
       nextalarm_pre5:
-        # device_class: timestamp
+        device_class: timestamp
         value_template: >
           {% if ( states( 'sensor.tom_erik_s_p20_pro_next_alarm' ) ) %}
-            "{{ ( as_timestamp(states('sensor.tom_erik_s_p20_pro_next_alarm' )) | float - 5*60 | float ) | timestamp_local }}"
+            {{ ( as_timestamp(states('sensor.tom_erik_s_p20_pro_next_alarm' )) | float - 5*60 | float ) | timestamp_local }}
           {% endif %}
 
       nextalarm_pre10:
-        # device_class: timestamp
+        device_class: timestamp
         value_template: >
           {% if ( states( 'sensor.tom_erik_s_p20_pro_next_alarm' ) ) %}
-            "{{ ( as_timestamp(states('sensor.tom_erik_s_p20_pro_next_alarm' )) | float - 10*60 | float ) | timestamp_local }}"
+            {{ ( as_timestamp(states('sensor.tom_erik_s_p20_pro_next_alarm' )) | float - 10*60 | float ) | timestamp_local }}
           {% endif %}
