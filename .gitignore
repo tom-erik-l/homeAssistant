@@ -25,3 +25,4 @@ custom_components
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
+secrets/*

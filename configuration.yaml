@@ -23,10 +23,14 @@ sensor: !include sensors.yaml
 light: !include light.yaml
 
 # See https://www.home-assistant.io/integrations/asuswrt/
+# Password authentication / telnet is no longer supported, so must use SSH auth instead:
+# https://community.home-assistant.io/t/asuswrt-asus-merlin-not-working-after-firmware-update/62027
+# https://community.home-assistant.io/t/how-i-got-asuswrt-device-tracker-working-with-ssh-key-files/47787/32
 asuswrt:
   host: "192.168.1.1"
   username: admin
-  password: !secret asusWRTPassword
+  ssh_key: secrets/ssh/id_rsa_ansibleAdminHome
+  # password: !secret asusWRTPassword
   sensors:
     - devices           # sensor.asuswrt_devices_connected
     - upload            # sensor.asuswrt_download (unit_of_measurement: Gigabyte - Daily accumulation)
