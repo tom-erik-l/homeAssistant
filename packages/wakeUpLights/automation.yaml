@@ -9,6 +9,21 @@ automation:
   #           - automation.wake_up_lights_bedroom_1
   #           - automation.wake_up_lights_bedroom_2
 
+  # - alias: "Wake up lights: Test"
+  #   use_blueprint:
+  #     path: wakeUpLights/wake-up-light-alarm-with-sunrise-effect.yaml
+  #     input:
+  #       light_entity: light.grp_stue
+  #       timestamp_sensor: sensor.nextalarm
+  #       # timestamp_sensor: "none"
+  #       # manual_time: "18:09:00"
+  #       sunrise_duration: 30
+  #       pre_sunrise_actions:
+  #         - service: light.turn_on
+  #           data:
+  #             entity_id:
+  #               - light.grp_spisestue
+
 
   - alias: "Wake up lights: Gang"
     initial_state: "on"
