@@ -21,99 +21,162 @@ views:
       - type: entities
         entities:
           - entity: light.grp_hele_stue
+            type: custom:multiple-entity-row
             name: Hele Stue
+            state_header: Hele stue
+            toggle: true
+            state_color: true
+            entities:
+              - entity: light.grp_stue
+                name: Stue
+                toggle: true
+              - entity: light.grp_spisestue
+                name: Spisestue
+                toggle: true
 
           - type: divider
-          - type: custom:slider-entity-row
-            entity: light.grp_stue
+          - entity: light.grp_stue
+            type: custom:multiple-entity-row
             name: Stue
-            hide_when_off: true
+            state_header: Lys
             toggle: true
+            state_color: true
+            entities:
+              - entity: switch.circadian_lighting_stue
+                name: Circadian
+                toggle: true
+
           - type: custom:slider-entity-row
             entity: light.grp_stue
-            name: Color temp.
-            hide_when_off: true
+            name: Brightness
+            hide_state: true
+            icon: mdi:brightness-percent
+          - type: custom:slider-entity-row
+            entity: light.grp_stue
+            name: Color temperature
             attribute: color_temp
             hide_state: true
-          - entity: switch.circadian_lighting_stue
-            name: Circadian
+            icon: mdi:temperature-kelvin
 
           - type: divider
-          - type: custom:slider-entity-row
-            entity: light.grp_spisestue
+          - entity: light.grp_spisestue
+            type: custom:multiple-entity-row
             name: Spisestue
-            hide_when_off: true
+            state_header: Lys
             toggle: true
+            state_color: true
+            entities:
+              - entity: switch.circadian_lighting_spisestue
+                name: Circadian
+                toggle: true
           - type: custom:slider-entity-row
             entity: light.grp_spisestue
-            name: Color temp.
-            hide_when_off: true
+            name: Brightness
+            hide_state: true
+            icon: mdi:brightness-percent
+          - type: custom:slider-entity-row
+            entity: light.grp_spisestue
+            name: Color temperature
             attribute: color_temp
             hide_state: true
-          - entity: switch.circadian_lighting_spisestue
-            name: Circadian
+            icon: mdi:temperature-kelvin
 
           - type: divider
-          - type: custom:slider-entity-row
-            entity: light.grp_sovevaerelse
+          - entity: light.grp_sovevaerelse
+            type: custom:multiple-entity-row
             name: Soveværelse
-            hide_when_off: true
+            state_header: Lys
             toggle: true
+            state_color: true
+            entities:
+              - entity: switch.circadian_lighting_sovevaerelse
+                name: Circadian
+                toggle: true
           - type: custom:slider-entity-row
             entity: light.grp_sovevaerelse
-            name: Color temp.
-            hide_when_off: true
+            name: Brightness
+            hide_state: true
+            icon: mdi:brightness-percent
+          - type: custom:slider-entity-row
+            entity: light.grp_sovevaerelse
+            name: Color temperature
             attribute: color_temp
             hide_state: true
-          - entity: switch.circadian_lighting_sovevaerelse
-            name: Circadian
+            icon: mdi:temperature-kelvin
 
           - type: divider
-          - type: custom:slider-entity-row
-            entity: light.grp_kokken
+          - entity: light.grp_kokken
+            type: custom:multiple-entity-row
             name: Køkken
-            hide_when_off: true
+            state_header: Lys
             toggle: true
+            state_color: true
+            entities:
+              - entity: switch.circadian_lighting_kokken
+                name: Circadian
+                toggle: true
           - type: custom:slider-entity-row
             entity: light.grp_kokken
-            name: Color temp.
-            hide_when_off: true
+            name: Brightness
+            hide_state: true
+            icon: mdi:brightness-percent
+          - type: custom:slider-entity-row
+            entity: light.grp_kokken
+            name: Color temperature
             attribute: color_temp
             hide_state: true
-          - entity: switch.circadian_lighting_kokken
-            name: Circadian
+            icon: mdi:temperature-kelvin
+
 
           - type: divider
-          - type: custom:slider-entity-row
-            entity: light.grp_badevaerelse
+          - entity: light.grp_badevaerelse
+            type: custom:multiple-entity-row
             name: Badeværelse
-            hide_when_off: true
+            state_header: Lys
             toggle: true
+            state_color: true
+            entities:
+              - entity: switch.circadian_lighting_badevaerelse
+                name: Circadian
+                toggle: true
           - type: custom:slider-entity-row
             entity: light.grp_badevaerelse
-            name: Color temp.
-            hide_when_off: true
+            name: Brightness
+            hide_state: true
+            icon: mdi:brightness-percent
+          - type: custom:slider-entity-row
+            entity: light.grp_badevaerelse
+            name: Color temperature
             attribute: color_temp
             hide_state: true
-          - entity: switch.circadian_lighting_badevaerelse
-            name: Circadian
+            icon: mdi:temperature-kelvin
+
 
           - type: divider
-          - type: custom:slider-entity-row
-            entity: light.grp_gang
+          - entity: light.grp_gang
+            type: custom:multiple-entity-row
             name: Gang
-            hide_when_off: true
+            state_header: Lys
             toggle: true
+            state_color: true
+            entities:
+              - entity: switch.circadian_lighting_gang
+                name: Circadian
+                toggle: true
           - type: custom:slider-entity-row
             entity: light.grp_gang
-            name: Color temp.
-            hide_when_off: true
+            name: Brightness
+            hide_state: true
+            icon: mdi:brightness-percent
+          - type: custom:slider-entity-row
+            entity: light.grp_gang
+            name: Color temperature
             attribute: color_temp
             hide_state: true
-          - entity: switch.circadian_lighting_gang
-            name: Circadian
+            icon: mdi:temperature-kelvin
 
         title: Lights
+        show_header_toggle: false
 
       - type: weather-forecast
         entity: weather.jyllandsgade11

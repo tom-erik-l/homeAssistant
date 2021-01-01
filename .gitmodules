@@ -4,3 +4,6 @@
 [submodule "www/lovelace-slider-entity-row"]
 	path = www/lovelace-slider-entity-row
 	url = https://github.com/thomasloven/lovelace-slider-entity-row.git
+[submodule "www/lovelace-multiple-entity-row"]
+	path = www/lovelace-multiple-entity-row
+	url = https://github.com/benct/lovelace-multiple-entity-row.git
