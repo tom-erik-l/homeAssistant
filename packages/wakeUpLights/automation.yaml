@@ -79,3 +79,17 @@ automation:
             entity_id:
               - switch.circadian_lighting_gang
               - switch.circadian_lighting_sovevaerelse
+
+  - alias: "Wake up lights:"
+    initial_state: "on"
+    trigger:
+      - platform: state
+        entity_id: input_boolean.enablewakeuplights
+    action:
+    - service: automation.toggle
+      data:
+        entity_id:
+          - automation.wake_up_lights_gang
+          - automation.wake_up_lights_bedroom_1
+          - automation.wake_up_lights_bedroom_2
+          - automation.wake_up_lights_bedroom_3
