@@ -14,7 +14,6 @@ asuswrt:
     - upload_speed      # sensor.asuswrt_upload (unit_of_measurement: Gigabyte - Daily accumulation)
     - download_speed    # sensor.asuswrt_upload_speed (unit_of_measurement: Mbit/s)
 
-
 zone:
   - name: Home
     latitude: 56.44922327394866
@@ -35,4 +34,18 @@ device_tracker:
 
   - platform: bluetooth_tracker
     new_device_defaults:
-      track_new_devices: false
+      track_new_devices: true
+
+  # - platform: bluetooth_le_tracker
+  #   new_device_defaults:
+  #     track_new_devices: true
+
+# person: # Now configured via the WebUI instead.
+#   - name: Tom-Erik
+#     id: tom-erik
+#     device_trackers:
+#       - device_tracker.tom_erik_s_p20_pro
+#       - device_tracker.huawei_p20_pro
+
+# Wifi presence detection with Bayesian sensor could also be interesting:
+# https://community.home-assistant.io/t/wifi-presence-detection/168258

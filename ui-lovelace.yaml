@@ -195,3 +195,29 @@ views:
           - input_boolean.enablewakeuplights
           - sensor.nextalarm
         title: Wake-up Lights
+
+      # - type: entities
+      #   entities:
+      #     - entity: input_boolean.enablewakeuplights
+      #       type: custom:multiple-entity-row
+      #       name: Wake up lights
+      #       state_header: Lys
+      #       toggle: true
+      #       state_color: true
+      #       entities:
+      #         - entity: sensor.nextalarm
+      #           name: Next alarm
+      #   title: Wake-up Lights
+
+      # - type: entities
+      #   entities:
+      #     - entity: sensor.nextalarm
+      #       type: custom:multiple-entity-row
+      #       name: Wake up lights
+      #       state_header: Alarm
+      #       # toggle: true
+      #       # state_color: true
+      #       entities:
+      #         - entity: input_boolean.enablewakeuplights
+      #           name: Use lights
+      #   title: Wake-up Lights
