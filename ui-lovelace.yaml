@@ -181,15 +181,6 @@ views:
       - type: weather-forecast
         entity: weather.jyllandsgade11
 
-      # - type: entities
-      #   entities:
-      #     - counter.stue
-      #     - counter.spisestue
-      #     - counter.kokken
-      #     - counter.sovevaerelse
-      #     - counter.badevaerelse
-      #     - counter.gang
-
       - type: entities
         entities:
           - input_boolean.enablewakeuplights
