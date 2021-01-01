@@ -1,0 +1,14 @@
+automation:
+  - alias: "Pause media playback during calls"
+    # Enable manual override of Circadian lights IF counter > 2:
+    initial_state: "on"
+    use_blueprint:
+      path: media/pause_media_during_calls/pause_media_during_calls.yaml
+      input:
+        phone_state_sensor: sensor.tom_erik_s_p20_pro_phone_state
+        media_player:
+          - media_player.projector
+          - media_player.chromecastaudio4176
+
+
+
