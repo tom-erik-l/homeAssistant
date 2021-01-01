@@ -1,3 +1,6 @@
 [submodule "blueprints/automation/wakeUpLights"]
 	path = blueprints/automation/wakeUpLights
 	url = https://gist.github.com/3191262c06936377fb136ae4c367297c.git
+[submodule "www/lovelace-slider-entity-row"]
+	path = www/lovelace-slider-entity-row
+	url = https://github.com/thomasloven/lovelace-slider-entity-row.git

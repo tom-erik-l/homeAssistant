@@ -2,79 +2,10 @@ title: Jyllandsgade11
 views:
   - path: default_view
     title: Home
-    badges:
-      # - entity: binary_sensor.updater
-      # - entity: person.tom_erik
-      # - entity: sensor.time
-      # - entity: sensor.local_ip
-      # - entity: sensor.tradfri_remote_control_7
-      # - entity: sensor.tradfri_remote_control_2
-      # - entity: sensor.ved_dor
-      # - entity: sensor.ved_dor_2
-      # - entity: sensor.tradfri_remote_control_6
-      # - entity: sensor.tradfri_remote_control_3
-      # - entity: sensor.transmission_down_speed
-      # - entity: sensor.transmission_up_speed
-      # - entity: sensor.transmission_status
-      # - entity: sensor.transmission_active_torrents
-      # - entity: sensor.transmission_paused_torrents
-      # - entity: sensor.transmission_total_torrents
-      # - entity: sensor.transmission_completed_torrents
-      # - entity: sensor.transmission_started_torrents
-      # - entity: sun.sun
+    # badges:
+    #   - entity: person.tom_erik
 
     cards:
-
-      # - type: entities
-      #   entities:
-      #     - light.badevaerelse
-      #     - light.badevaerelse_2
-      #     - light.badevaerelse_3
-      #   title: Bathroom
-
-      # - type: entities
-      #   entities:
-      #     - light.sovevaerelse
-      #     - light.sovevaerelse_2
-      #     - light.sovevaerelse_3
-      #   title: Bedroom
-
-      # - type: entities
-      #   entities:
-      #     - light.spisestue_spot
-      #     - light.spisebord
-      #     - light.spisestue_spot_2
-      #     - light.spisestue_spot_3
-      #     - light.spisestue_spot_4
-      #   title: Dining room
-
-      # - type: entities
-      #   entities:
-      #     - light.gang
-      #     - light.gang_2
-      #   title: Hallway
-
-      # - type: entities
-      #   entities:
-      #     - light.kokken
-      #     - light.kokken_2
-      #     - light.kokken_3
-      #   title: Kitchen
-
-      # - type: entities
-      #   entities:
-      #     # - sensor.hp_officejet_pro_x451dw_printer
-      #     # - light.stue_spot
-      #     # - light.stue_spot_2
-      #     # - light.stue_spot_3
-      #     # - light.stue_spot_4
-      #     # - sensor.skrivebord
-      #     # - switch.media_corner_control_outlet
-      #     # - switch.desk_control_outlet
-      #     # - media_player.chromecastaudio4176
-      #     # - media_player.projector
-      #   title: Living Room
-
       - type: media-control
         entity: media_player.projector
 
@@ -89,27 +20,103 @@ views:
 
       - type: entities
         entities:
-          - light.grp_hele_stue
-          - light.grp_spisestue
-          - light.grp_stue
-          - light.grp_badevaerelse
-          - light.grp_gang
-          - light.grp_kokken
-          - light.grp_sovevaerelse
-        title: Light
+          - entity: light.grp_hele_stue
+            name: Hele Stue
+
+          - type: divider
+          - type: custom:slider-entity-row
+            entity: light.grp_stue
+            name: Stue
+            hide_when_off: true
+            toggle: true
+          - type: custom:slider-entity-row
+            entity: light.grp_stue
+            name: Color temp.
+            hide_when_off: true
+            attribute: color_temp
+            hide_state: true
+          - entity: switch.circadian_lighting_stue
+            name: Circadian
+
+          - type: divider
+          - type: custom:slider-entity-row
+            entity: light.grp_spisestue
+            name: Spisestue
+            hide_when_off: true
+            toggle: true
+          - type: custom:slider-entity-row
+            entity: light.grp_spisestue
+            name: Color temp.
+            hide_when_off: true
+            attribute: color_temp
+            hide_state: true
+          - entity: switch.circadian_lighting_spisestue
+            name: Circadian
+
+          - type: divider
+          - type: custom:slider-entity-row
+            entity: light.grp_sovevaerelse
+            name: Soveværelse
+            hide_when_off: true
+            toggle: true
+          - type: custom:slider-entity-row
+            entity: light.grp_sovevaerelse
+            name: Color temp.
+            hide_when_off: true
+            attribute: color_temp
+            hide_state: true
+          - entity: switch.circadian_lighting_sovevaerelse
+            name: Circadian
+
+          - type: divider
+          - type: custom:slider-entity-row
+            entity: light.grp_kokken
+            name: Køkken
+            hide_when_off: true
+            toggle: true
+          - type: custom:slider-entity-row
+            entity: light.grp_kokken
+            name: Color temp.
+            hide_when_off: true
+            attribute: color_temp
+            hide_state: true
+          - entity: switch.circadian_lighting_kokken
+            name: Circadian
+
+          - type: divider
+          - type: custom:slider-entity-row
+            entity: light.grp_badevaerelse
+            name: Badeværelse
+            hide_when_off: true
+            toggle: true
+          - type: custom:slider-entity-row
+            entity: light.grp_badevaerelse
+            name: Color temp.
+            hide_when_off: true
+            attribute: color_temp
+            hide_state: true
+          - entity: switch.circadian_lighting_badevaerelse
+            name: Circadian
+
+          - type: divider
+          - type: custom:slider-entity-row
+            entity: light.grp_gang
+            name: Gang
+            hide_when_off: true
+            toggle: true
+          - type: custom:slider-entity-row
+            entity: light.grp_gang
+            name: Color temp.
+            hide_when_off: true
+            attribute: color_temp
+            hide_state: true
+          - entity: switch.circadian_lighting_gang
+            name: Circadian
+
+        title: Lights
 
       - type: weather-forecast
         entity: weather.jyllandsgade11
-
-      - type: entities
-        entities:
-          - switch.circadian_lighting_stue
-          - switch.circadian_lighting_spisestue
-          - switch.circadian_lighting_kokken
-          - switch.circadian_lighting_sovevaerelse
-          - switch.circadian_lighting_badevaerelse
-          - switch.circadian_lighting_gang
-        title: Automations
 
       # - type: entities
       #   entities:

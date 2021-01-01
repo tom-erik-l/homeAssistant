@@ -24,6 +24,9 @@ light: !include light.yaml
 
 lovelace:
   mode: yaml
+  resources:
+    - url: "/local/lovelace-slider-entity-row/slider-entity-row.js"
+      type: module
 
 
 # pi_hole:
