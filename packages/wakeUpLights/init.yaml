@@ -2,6 +2,7 @@ sensor:
   - platform: time_date
     display_options:
       - "date_time_iso"
+      - "date"
 
   - platform: template
     sensors:
