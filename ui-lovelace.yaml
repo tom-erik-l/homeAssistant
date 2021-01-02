@@ -20,21 +20,21 @@ views:
 
       - type: entities
         entities:
-          - entity: light.grp_hele_stue
-            type: custom:multiple-entity-row
-            name: Hele Stue
-            state_header: Hele stue
-            toggle: true
-            state_color: true
-            entities:
-              - entity: light.grp_stue
-                name: Stue
-                toggle: true
-              - entity: light.grp_spisestue
-                name: Spisestue
-                toggle: true
+          # - entity: light.grp_hele_stue
+          #   type: custom:multiple-entity-row
+          #   name: Hele Stue
+          #   state_header: Hele stue
+          #   toggle: true
+          #   state_color: true
+          #   entities:
+          #     - entity: light.grp_stue
+          #       name: Stue
+          #       toggle: true
+          #     - entity: light.grp_spisestue
+          #       name: Spisestue
+          #       toggle: true
 
-          - type: divider
+          # - type: divider
           - entity: light.grp_stue
             type: custom:multiple-entity-row
             name: Stue
