@@ -1,3 +1,9 @@
+# entity_id: media_player.plex_plex_cast_chromecast_3
+  # states:
+  # playing
+  # paused
+  # unavailable
+
 automation:
   - alias: Turn off lights when playing movie
     trigger:
@@ -21,6 +27,12 @@ automation:
       entity_id: media_player.plex_plex_cast_chromecast_3
       from: "playing"
       to: "paused"
+    - platform: state
+      entity_id: media_player.plex_plex_cast_chromecast_3
+      to: "unavailable"
+    - platform: state
+      entity_id: media_player.projector
+      to:  "off"
     action:
     - service: light.turn_on
       data:
@@ -30,7 +42,22 @@ automation:
           - light.grp_kokken
           - light.grp_badevaerelse
         transition: 2
-      # states:
-      # playing
-      # paused
-      # unavailable
+
+  - alias: Turn off projector when no longer playing
+    trigger:
+      - platform: state
+        entity_id: media_player.projector
+        to:  "off"
+        for: "00:02:00"
+      - platform: state
+        entity_id: media_player.plex_plex_cast_chromecast_3
+        to:  "unavailable"
+        for: "00:05:00"
+    action:
+    - service: script.turn_on
+      data:
+        entity_id: script.projector_powertoggle
+    - delay: 00:00:02
+    - service: script.turn_on
+      data:
+        entity_id: script.projector_ok

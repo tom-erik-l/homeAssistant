@@ -1,0 +1,23 @@
+homeassistant:
+  customize:
+    package.node_anchors:
+      lights: &lights
+        entity_id:
+          - light.grp_stue
+          - light.grp_spisestue
+          - light.grp_kokken
+          - light.grp_sovevaerelse
+          - light.grp_badevaerelse
+          - light.grp_gang
+
+automation:
+  - alias: Turn off lights when not home
+    initial_state: "on"
+    trigger:
+      - platform: state
+        entity_id: person.tom_erik
+        to:  "not_home"
+        for: "00:10:00" # Must not have been home for 10 minutes
+    action:
+    - service: light.turn_off
+      data: *lights

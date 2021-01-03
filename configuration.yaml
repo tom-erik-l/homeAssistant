@@ -38,7 +38,8 @@ homeassistant:
   packages:
     wakeuplights: !include_dir_merge_named packages/wakeUpLights
     circadianlights: !include_dir_merge_named packages/circadianLighting
-    medialights: !include_dir_merge_named packages/mediaLights
+    mediacontrol: !include_dir_merge_named packages/media
     awayfromhome: !include_dir_merge_named packages/awayFromHome
+    broadlinkir: !include_dir_merge_named packages/BroadlinkIR
 
 
