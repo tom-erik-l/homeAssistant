@@ -8,12 +8,15 @@ automation:
         timestamp_sensor: sensor.nextAlarm_pre10
         sunrise_duration: 20
         pre_sunrise_actions:
+          - condition: template
+            value_template: "{{ states('person.tom-erik') == 'home' }}"
           - service: switch.turn_off
             data:
               entity_id:
                 - switch.circadian_lighting_gang
                 - switch.circadian_lighting_sovevaerelse
         post_sunrise_actions: []
+
 
 
   - alias: "Wake up lights: Bedroom 1"
@@ -24,7 +27,9 @@ automation:
         light_entity: light.sovevaerelse
         timestamp_sensor: sensor.nextAlarm_pre5
         sunrise_duration: 20
-        pre_sunrise_actions: []
+        pre_sunrise_actions:
+          - condition: template
+            value_template: "{{ states('person.tom-erik') == 'home' }}"
         post_sunrise_actions: []
 
   - alias: "Wake up lights: Bedroom 2"
@@ -35,7 +40,9 @@ automation:
         light_entity: light.sovevaerelse_2
         timestamp_sensor: sensor.nextAlarm
         sunrise_duration: 20
-        pre_sunrise_actions: []
+        pre_sunrise_actions:
+          - condition: template
+            value_template: "{{ states('person.tom-erik') == 'home' }}"
         post_sunrise_actions: []
 
   - alias: "Wake up lights: Bedroom 3"
@@ -46,7 +53,9 @@ automation:
         light_entity: light.sovevaerelse_3
         timestamp_sensor: sensor.nextAlarm
         sunrise_duration: 20
-        pre_sunrise_actions: []
+        pre_sunrise_actions:
+          - condition: template
+            value_template: "{{ states('person.tom-erik') == 'home' }}"
         post_sunrise_actions:
         - service: switch.turn_on
           data:
