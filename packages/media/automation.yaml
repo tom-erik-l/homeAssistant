@@ -52,7 +52,10 @@ automation:
       - platform: state
         entity_id: media_player.plex_plex_cast_chromecast_3
         to:  "unavailable"
-        for: "00:05:00"
+        for: "00:02:00"
+    condition:
+      - condition: template # don't run again within 10 minutes
+        value_template: “{{ ( as_timestamp(now()) - as_timestamp(state_attr(automation.turn_off_projector_when_no_longer_playing’, ‘last_triggered’)) |int(0) ) > 3600 }}”
     action:
     - service: script.turn_on
       data:
