@@ -2,7 +2,7 @@ homeassistant:
   customize:
     package.node_anchors:
       counters: &counters
-        entity_id:
+        entity_id: &counterIDs
           - counter.stue
           - counter.spisestue
           - counter.kokken
@@ -60,8 +60,10 @@ automation:
     # Reset the counter every 10 seconds
     initial_state: "on"
     trigger:
-    - platform: time_pattern
-      seconds: /10
+      - platform: numeric_state
+        entity_id: *counterIDs
+        above: 0
+        for: "00:00:10"
     action:
     - service: counter.reset
       data: *counters
