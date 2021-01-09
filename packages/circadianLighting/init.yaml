@@ -3,7 +3,7 @@
 circadian_lighting:
   min_colortemp: 1000
   max_colortemp: 7000
-  sunrise_offset: "00:00:00"
+  sunrise_offset: "02:00:00"
 
 switch:
   - platform: circadian_lighting
