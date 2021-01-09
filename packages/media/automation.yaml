@@ -27,12 +27,12 @@ automation:
       entity_id: media_player.plex_plex_cast_chromecast_3
       from: "playing"
       to: "paused"
-    - platform: state
-      entity_id: media_player.plex_plex_cast_chromecast_3
-      to: "unavailable"
-    - platform: state
-      entity_id: media_player.projector
-      to:  "off"
+    # - platform: state
+    #   entity_id: media_player.plex_plex_cast_chromecast_3
+    #   to: "unavailable"
+    # - platform: state
+    #   entity_id: media_player.projector
+    #   to:  "off"
     action:
     - service: light.turn_on
       data:
@@ -45,17 +45,17 @@ automation:
 
   - alias: Turn off projector when no longer playing
     trigger:
-      - platform: state
-        entity_id: media_player.projector
-        to:  "off"
-        for: "00:02:00"
+      # - platform: state
+      #   entity_id: media_player.projector
+      #   to:  "off"
+      #   for: "00:02:00"
       - platform: state
         entity_id: media_player.plex_plex_cast_chromecast_3
         to:  "unavailable"
         for: "00:02:00"
     condition:
       - condition: template # don't run again within 10 minutes
-        value_template: “{{ ( as_timestamp(now()) - as_timestamp(state_attr(automation.turn_off_projector_when_no_longer_playing’, ‘last_triggered’)) |int(0) ) > 3600 }}”
+        value_template: “{{ ( as_timestamp(states('sensor.date_time_iso')) - as_timestamp(state_attr('automation.turn_off_projector_when_no_longer_playing', 'last_triggered')) | int(0) ) > (10 * 60) }}”
     action:
     - service: script.turn_on
       data:
@@ -64,3 +64,17 @@ automation:
     - service: script.turn_on
       data:
         entity_id: script.projector_ok
+
+
+  - alias: Turn on projector if inadvertendly being turned off
+    trigger:
+      - platform: state
+        entity_id: media_player.plex_plex_cast_chromecast_3
+        to: "playing"
+    condition:
+      - condition: template # don't run again within 10 minutes
+        value_template: “{{ ( as_timestamp(states('sensor.date_time_iso')) - as_timestamp(state_attr('automation.turn_off_projector_when_no_longer_playing', 'last_triggered')) | int(0) ) > (20 * 60) }}”
+    action:
+    - service: script.turn_on
+      data:
+        entity_id: script.projector_powertoggle
