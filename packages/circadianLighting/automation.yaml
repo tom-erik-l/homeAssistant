@@ -40,8 +40,7 @@ homeassistant:
           - input_boolean.disableincrementgang
 
 automation:
-  - id: hass_startup
-    alias: 'Hass startup'
+  - alias: HASS startup
     trigger:
     - platform: homeassistant
       event: start
