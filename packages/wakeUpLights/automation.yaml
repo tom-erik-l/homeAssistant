@@ -57,11 +57,11 @@ automation:
           - condition: template
             value_template: "{{ states('person.tom-erik') == 'home' }}"
         post_sunrise_actions:
-        - service: switch.turn_on
-          data:
-            entity_id:
-              - switch.circadian_lighting_gang
-              - switch.circadian_lighting_sovevaerelse
+          - service: switch.turn_on
+            data:
+              entity_id:
+                - switch.circadian_lighting_gang
+                - switch.circadian_lighting_sovevaerelse
 
   - alias: "Wake up lights:"
     initial_state: "on"
