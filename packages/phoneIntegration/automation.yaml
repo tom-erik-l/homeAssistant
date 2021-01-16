@@ -1,6 +1,5 @@
 automation:
   - alias: "Pause media playback during calls"
-    # Enable manual override of Circadian lights IF counter > 2:
     initial_state: "on"
     use_blueprint:
       path: media/pause_media_during_calls/pause_media_during_calls.yaml
