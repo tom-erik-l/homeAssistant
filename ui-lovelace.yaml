@@ -185,5 +185,6 @@ views:
         entities:
           - input_boolean.enablewakeuplights
           - sensor.nextalarm
+          - person.tom_erik
         title: Wake-up Lights
 

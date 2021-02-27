@@ -4,12 +4,12 @@ automation:
     use_blueprint:
       path: wakeUpLights/wake-up-light-alarm-with-sunrise-effect.yaml
       input:
+        min_mired: '0'
         light_entity: light.gang
-        timestamp_sensor: sensor.nextAlarm_pre10
-        sunrise_duration: 20
+        timestamp_sensor: sensor.nextAlarm_pre15
+        sunrise_duration: 15
+        check_entity: person.tom_erik
         pre_sunrise_actions:
-          - condition: template
-            value_template: "{{ states('person.tom-erik') == 'home' }}"
           - service: switch.turn_off
             data:
               entity_id:
@@ -17,19 +17,17 @@ automation:
                 - switch.circadian_lighting_sovevaerelse
         post_sunrise_actions: []
 
-
-
   - alias: "Wake up lights: Bedroom 1"
     initial_state: "on"
     use_blueprint:
       path: wakeUpLights/wake-up-light-alarm-with-sunrise-effect.yaml
       input:
+        min_mired: '0'
         light_entity: light.sovevaerelse
-        timestamp_sensor: sensor.nextAlarm_pre5
-        sunrise_duration: 20
-        pre_sunrise_actions:
-          - condition: template
-            value_template: "{{ states('person.tom-erik') == 'home' }}"
+        timestamp_sensor: sensor.nextAlarm_pre10
+        sunrise_duration: 15
+        check_entity: person.tom_erik
+        pre_sunrise_actions: []
         post_sunrise_actions: []
 
   - alias: "Wake up lights: Bedroom 2"
@@ -37,12 +35,12 @@ automation:
     use_blueprint:
       path: wakeUpLights/wake-up-light-alarm-with-sunrise-effect.yaml
       input:
+        min_mired: '0'
         light_entity: light.sovevaerelse_2
-        timestamp_sensor: sensor.nextAlarm
-        sunrise_duration: 20
-        pre_sunrise_actions:
-          - condition: template
-            value_template: "{{ states('person.tom-erik') == 'home' }}"
+        timestamp_sensor: sensor.nextAlarm_pre5
+        sunrise_duration: 15
+        check_entity: person.tom_erik
+        pre_sunrise_actions: []
         post_sunrise_actions: []
 
   - alias: "Wake up lights: Bedroom 3"
@@ -50,12 +48,12 @@ automation:
     use_blueprint:
       path: wakeUpLights/wake-up-light-alarm-with-sunrise-effect.yaml
       input:
+        min_mired: '0'
         light_entity: light.sovevaerelse_3
         timestamp_sensor: sensor.nextAlarm
-        sunrise_duration: 20
-        pre_sunrise_actions:
-          - condition: template
-            value_template: "{{ states('person.tom-erik') == 'home' }}"
+        sunrise_duration: 15
+        check_entity: person.tom_erik
+        pre_sunrise_actions: []
         post_sunrise_actions:
           - service: switch.turn_on
             data:
