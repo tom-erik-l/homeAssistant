@@ -6,10 +6,6 @@ default_config:
 tts:
 - platform: google_translate
 
-# IKEA Trådfri
-tradfri:
-  host: "192.168.1.20"
-
 logger:
   default: error
   logs:
@@ -17,6 +13,7 @@ logger:
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automation/
+automation uiManaged: !include automations.yaml
 script: !include_dir_merge_named  script/
 scene: !include scenes.yaml
 sensor: !include sensors.yaml
@@ -36,10 +33,11 @@ lovelace:
 
 homeassistant:
   packages:
-    wakeuplights: !include_dir_merge_named packages/wakeUpLights
-    circadianlights: !include_dir_merge_named packages/circadianLighting
-    mediacontrol: !include_dir_merge_named packages/media
-    awayfromhome: !include_dir_merge_named packages/awayFromHome
-    broadlinkir: !include_dir_merge_named packages/BroadlinkIR
+    outdoorlights: !include_dir_merge_named packages/outdoorLights
+    #wakeuplights: !include_dir_merge_named packages/wakeUpLights
+    #circadianlights: !include_dir_merge_named packages/circadianLighting
+    #mediacontrol: !include_dir_merge_named packages/media
+    #awayfromhome: !include_dir_merge_named packages/awayFromHome
+    #broadlinkir: !include_dir_merge_named packages/BroadlinkIR
 
 

@@ -1,0 +1,21 @@
+input_select:
+  udendors_lys_tilstand:
+    options:
+      - "Off"
+      - "Dim"
+      - "Full"
+    name: Udendørs Lys Tilstand
+
+input_number:
+  udendors_dim_brightness:
+    min: 25
+    max: 100
+    step: 1
+  udendors_full_brightness:
+    min: 30
+    max: 100
+    step: 1
+  udendors_min_lux_for_dim:
+    min: 5
+    max: 2500
+    step: 1

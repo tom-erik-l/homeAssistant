@@ -1,25 +1,50 @@
-title: Jyllandsgade11
 views:
   - path: default_view
     title: Home
-    # badges:
-    #   - entity: person.tom_erik
+
 
     cards:
-      - type: media-control
-        entity: media_player.projector
+      # - type: media-control
+      #   entity: media_player.plex_plex_cast_chromecast_3
 
-      - type: media-control
-        entity: media_player.plex_plex_cast_chromecast_3
+      # - type: media-control
+      #   entity: media_player.chromecastaudio4176
 
-      - type: media-control
-        entity: media_player.chromecastaudio4176
-
-      - type: media-control
-        entity: media_player.plex_plex_cast_chromecast
+      # - type: media-control
+      #   entity: media_player.plex_plex_cast_chromecast
 
       - type: entities
         entities:
+          - entity: input_number.udendors_dim_brightness
+            name: Dim brightness level
+          - entity: input_number.udendors_full_brightness
+            name: Full brightness level
+          - entity: input_number.udendors_min_lux_for_dim
+            name: Min. lux for dim activation
+          - entity: input_select.udendors_lys_tilstand
+            name: State
+        title: Outdoor lights state machine
+
+      - type: entities
+        entities:
+          - entity: light.hoveddor_lys
+            name: Hoveddør
+
+          - entity: light.carport_lys
+            name: Carport
+
+          - entity: light.grp_udendors_lys
+            name: Outdoor lights group
+
+          - type: divider
+            title: Carport bevægelsessensor
+
+          - entity: sensor.carport_bevaegelsessensor_illuminance
+            name: Illuminance
+          - entity: binary_sensor.carport_bevaegelsessensor_occupancy
+            name: Occupancy
+          - entity: sensor.carport_bevaegelsessensor_temperature
+            name: Temperature
           # - entity: light.grp_hele_stue
           #   type: custom:multiple-entity-row
           #   name: Hele Stue
@@ -35,145 +60,96 @@ views:
           #       toggle: true
 
           # - type: divider
-          - entity: light.grp_stue
-            type: custom:multiple-entity-row
-            name: Stue
-            state_header: Lys
-            toggle: true
-            state_color: true
-            entities:
-              - entity: switch.circadian_lighting_stue
-                name: Circadian
-                toggle: true
+          # - entity: light.grp_kontor
+          #   type: custom:multiple-entity-row
+          #   name: Kontor
+          #   state_header: Lys
+          #   toggle: true
+          #   state_color: true
+          #   entities:
+          #     - entity: switch.circadian_lighting_kontor
+          #       name: Circadian
+          #       toggle: true
+          # - type: custom:slider-entity-row
+          #   entity: light.grp_kontor
+          #   name: Brightness
+          #   hide_state: true
+          #   icon: mdi:brightness-percent
+          # - type: custom:slider-entity-row
+          #   entity: light.grp_kontor
+          #   name: Color temperature
+          #   attribute: color_temp
+          #   hide_state: true
+          #   icon: mdi:temperature-kelvin
 
-          - type: custom:slider-entity-row
-            entity: light.grp_stue
-            name: Brightness
-            hide_state: true
-            icon: mdi:brightness-percent
-          - type: custom:slider-entity-row
-            entity: light.grp_stue
-            name: Color temperature
-            attribute: color_temp
-            hide_state: true
-            icon: mdi:temperature-kelvin
+          # - type: divider
+          # - entity: light.grp_sovevaerelse
+          #   type: custom:multiple-entity-row
+          #   name: Soveværelse
+          #   state_header: Lys
+          #   toggle: true
+          #   state_color: true
+          #   entities:
+          #     - entity: switch.circadian_lighting_sovevaerelse
+          #       name: Circadian
+          #       toggle: true
+          # - type: custom:slider-entity-row
+          #   entity: light.grp_sovevaerelse
+          #   name: Brightness
+          #   hide_state: true
+          #   icon: mdi:brightness-percent
+          # - type: custom:slider-entity-row
+          #   entity: light.grp_sovevaerelse
+          #   name: Color temperature
+          #   attribute: color_temp
+          #   hide_state: true
+          #   icon: mdi:temperature-kelvin
 
-          - type: divider
-          - entity: light.grp_spisestue
-            type: custom:multiple-entity-row
-            name: Spisestue
-            state_header: Lys
-            toggle: true
-            state_color: true
-            entities:
-              - entity: switch.circadian_lighting_spisestue
-                name: Circadian
-                toggle: true
-          - type: custom:slider-entity-row
-            entity: light.grp_spisestue
-            name: Brightness
-            hide_state: true
-            icon: mdi:brightness-percent
-          - type: custom:slider-entity-row
-            entity: light.grp_spisestue
-            name: Color temperature
-            attribute: color_temp
-            hide_state: true
-            icon: mdi:temperature-kelvin
+          # - type: divider
+          # - entity: light.grp_entre
+          #   type: custom:multiple-entity-row
+          #   name: Entre
+          #   state_header: Lys
+          #   toggle: true
+          #   state_color: true
+          #   entities:
+          #     - entity: switch.circadian_lighting_entre
+          #       name: Circadian
+          #       toggle: true
+          # - type: custom:slider-entity-row
+          #   entity: light.grp_entre
+          #   name: Brightness
+          #   hide_state: true
+          #   icon: mdi:brightness-percent
+          # - type: custom:slider-entity-row
+          #   entity: light.grp_entre
+          #   name: Color temperature
+          #   attribute: color_temp
+          #   hide_state: true
+          #   icon: mdi:temperature-kelvin
 
-          - type: divider
-          - entity: light.grp_sovevaerelse
-            type: custom:multiple-entity-row
-            name: Soveværelse
-            state_header: Lys
-            toggle: true
-            state_color: true
-            entities:
-              - entity: switch.circadian_lighting_sovevaerelse
-                name: Circadian
-                toggle: true
-          - type: custom:slider-entity-row
-            entity: light.grp_sovevaerelse
-            name: Brightness
-            hide_state: true
-            icon: mdi:brightness-percent
-          - type: custom:slider-entity-row
-            entity: light.grp_sovevaerelse
-            name: Color temperature
-            attribute: color_temp
-            hide_state: true
-            icon: mdi:temperature-kelvin
-
-          - type: divider
-          - entity: light.grp_kokken
-            type: custom:multiple-entity-row
-            name: Køkken
-            state_header: Lys
-            toggle: true
-            state_color: true
-            entities:
-              - entity: switch.circadian_lighting_kokken
-                name: Circadian
-                toggle: true
-          - type: custom:slider-entity-row
-            entity: light.grp_kokken
-            name: Brightness
-            hide_state: true
-            icon: mdi:brightness-percent
-          - type: custom:slider-entity-row
-            entity: light.grp_kokken
-            name: Color temperature
-            attribute: color_temp
-            hide_state: true
-            icon: mdi:temperature-kelvin
-
-
-          - type: divider
-          - entity: light.grp_badevaerelse
-            type: custom:multiple-entity-row
-            name: Badeværelse
-            state_header: Lys
-            toggle: true
-            state_color: true
-            entities:
-              - entity: switch.circadian_lighting_badevaerelse
-                name: Circadian
-                toggle: true
-          - type: custom:slider-entity-row
-            entity: light.grp_badevaerelse
-            name: Brightness
-            hide_state: true
-            icon: mdi:brightness-percent
-          - type: custom:slider-entity-row
-            entity: light.grp_badevaerelse
-            name: Color temperature
-            attribute: color_temp
-            hide_state: true
-            icon: mdi:temperature-kelvin
-
-
-          - type: divider
-          - entity: light.grp_gang
-            type: custom:multiple-entity-row
-            name: Gang
-            state_header: Lys
-            toggle: true
-            state_color: true
-            entities:
-              - entity: switch.circadian_lighting_gang
-                name: Circadian
-                toggle: true
-          - type: custom:slider-entity-row
-            entity: light.grp_gang
-            name: Brightness
-            hide_state: true
-            icon: mdi:brightness-percent
-          - type: custom:slider-entity-row
-            entity: light.grp_gang
-            name: Color temperature
-            attribute: color_temp
-            hide_state: true
-            icon: mdi:temperature-kelvin
+          # - type: divider
+          # - entity: light.grp_stue
+          #   type: custom:multiple-entity-row
+          #   name: Sofabord
+          #   state_header: Lys
+          #   toggle: true
+          #   state_color: true
+          #   entities:
+          #     - entity: switch.circadian_lighting_stue
+          #       name: Circadian
+          #       toggle: true
+          # - type: custom:slider-entity-row
+          #   entity: light.grp_stue
+          #   name: Brightness
+          #   hide_state: true
+          #   icon: mdi:brightness-percent
+          # - type: custom:slider-entity-row
+          #   entity: light.grp_stue
+          #   name: Color temperature
+          #   attribute: color_temp
+          #   hide_state: true
+          #   icon: mdi:temperature-kelvin
 
         title: Lights
         show_header_toggle: false
@@ -181,10 +157,10 @@ views:
       - type: weather-forecast
         entity: weather.jyllandsgade11
 
-      - type: entities
-        entities:
-          - input_boolean.enablewakeuplights
-          - sensor.nextalarm
-          - person.tom_erik
-        title: Wake-up Lights
+      # - type: entities
+      #   entities:
+      #     - input_boolean.enablewakeuplights
+      #     - sensor.nextalarm
+      #     - person.tom_erik
+      #   title: Wake-up Lights
 
