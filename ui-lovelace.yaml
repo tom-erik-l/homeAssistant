@@ -33,18 +33,12 @@ views:
           - entity: light.carport_lys
             name: Carport
 
+          - entity: light.kontor_lys
+            name: Kontor
+
           - entity: light.grp_udendors_lys
             name: Outdoor lights group
 
-          - type: divider
-            title: Carport bevægelsessensor
-
-          - entity: sensor.carport_bevaegelsessensor_illuminance
-            name: Illuminance
-          - entity: binary_sensor.carport_bevaegelsessensor_occupancy
-            name: Occupancy
-          - entity: sensor.carport_bevaegelsessensor_temperature
-            name: Temperature
           # - entity: light.grp_hele_stue
           #   type: custom:multiple-entity-row
           #   name: Hele Stue
@@ -154,8 +148,15 @@ views:
         title: Lights
         show_header_toggle: false
 
-      - type: weather-forecast
-        entity: weather.jyllandsgade11
+      - type: entities
+        entities:
+          - entity: sensor.carport_bevaegelsessensor_illuminance
+            name: Illuminance
+          - entity: binary_sensor.carport_bevaegelsessensor_occupancy
+            name: Occupancy
+          - entity: sensor.carport_bevaegelsessensor_temperature
+            name: Temperature
+        title: Carport bevægelsessensor
 
       # - type: entities
       #   entities:

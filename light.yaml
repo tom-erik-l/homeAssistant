@@ -37,6 +37,7 @@
   entities: 
     - light.carport_lys
     - light.hoveddor_lys
+    - light.kontor_lys
 
 # - platform: group
 #   name: grp Carport
