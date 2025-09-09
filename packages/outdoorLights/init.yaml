@@ -17,5 +17,8 @@ input_number:
     step: 1
   udendors_min_lux_for_dim:
     min: 5
-    max: 2500
+    max: 30
     step: 1
+
+input_boolean:
+  dim_available:

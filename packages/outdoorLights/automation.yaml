@@ -39,6 +39,27 @@ automation:
       data:
         brightness_pct: "{{ states('input_number.udendors_full_brightness') | int }}"
 
+  - alias: ODLights - Dim Available
+    triggers:
+    - trigger: time
+      at: '07:00:00'
+    - trigger: time
+      at: '17:00:00'
+    actions:
+    - action: input_boolean.turn_on
+      target: 
+        entity_id: input_boolean.dim_available  
+
+  - alias: ODLights - Dim Un-Available
+    triggers:
+    - trigger: time
+      at: '09:00:00'
+    - trigger: time
+      at: '00:00:00'
+    actions:
+    - action: input_boolean.turn_off
+      target: 
+        entity_id: input_boolean.dim_available  
 
 ### TRANSITIONS
   - alias: ODLights - Turn off at midnight
@@ -58,9 +79,14 @@ automation:
       entity_id: sensor.carport_bevaegelsessensor_illuminance
       below: input_number.udendors_min_lux_for_dim
     conditions:
-    - condition: time
-      after: '17:00:00'
-      before: 00:00:00
+      - condition: or
+        conditions:    
+        - condition: time
+          after: '07:00:00'
+          before: 09:00:00     
+        - condition: time
+          after: '17:00:00'
+          before: 00:00:00
     actions:
       - action: input_select.select_option
         target:

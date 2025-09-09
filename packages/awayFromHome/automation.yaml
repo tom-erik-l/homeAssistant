@@ -3,12 +3,8 @@ homeassistant:
     package.node_anchors:
       lights: &lights
         entity_id:
-          - light.grp_stue
-          - light.grp_spisestue
-          - light.grp_kokken
+          - light.grp_kontor
           - light.grp_sovevaerelse
-          - light.grp_badevaerelse
-          - light.grp_gang
 
 automation:
   - alias: Turn off lights when not home

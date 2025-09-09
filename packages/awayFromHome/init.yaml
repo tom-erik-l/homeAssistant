@@ -2,17 +2,17 @@
 # Password authentication / telnet is no longer supported, so must use SSH auth instead:
 # https://community.home-assistant.io/t/asuswrt-asus-merlin-not-working-after-firmware-update/62027
 # https://community.home-assistant.io/t/how-i-got-asuswrt-device-tracker-working-with-ssh-key-files/47787/32
-asuswrt:
-  host: "192.168.1.1"
-  username: admin
-  ssh_key: secrets/ssh/id_rsa_ansibleAdminHome
-  # password: !secret asusWRTPassword
-  sensors:
-    - devices           # sensor.asuswrt_devices_connected
-    - upload            # sensor.asuswrt_download (unit_of_measurement: Gigabyte - Daily accumulation)
-    - download          # sensor.asuswrt_download_speed (unit_of_measurement: Mbit/s)
-    - upload_speed      # sensor.asuswrt_upload (unit_of_measurement: Gigabyte - Daily accumulation)
-    - download_speed    # sensor.asuswrt_upload_speed (unit_of_measurement: Mbit/s)
+# asuswrt:
+#   host: "192.168.1.1"
+#   username: admin
+#   ssh_key: secrets/ssh/id_rsa_ansibleAdminHome
+#   # password: !secret asusWRTPassword
+#   sensors:
+#     - devices           # sensor.asuswrt_devices_connected
+#     - upload            # sensor.asuswrt_download (unit_of_measurement: Gigabyte - Daily accumulation)
+#     - download          # sensor.asuswrt_download_speed (unit_of_measurement: Mbit/s)
+#     - upload_speed      # sensor.asuswrt_upload (unit_of_measurement: Gigabyte - Daily accumulation)
+#     - download_speed    # sensor.asuswrt_upload_speed (unit_of_measurement: Mbit/s)
 
 zone:
   - name: Home
@@ -28,9 +28,9 @@ zone:
     icon: mdi:briefcase
 
 device_tracker:
-  - platform: asuswrt
-    new_device_defaults:
-      track_new_devices: false
+#   - platform: asuswrt
+#     new_device_defaults:
+#       track_new_devices: false
 
   - platform: bluetooth_tracker
     new_device_defaults:

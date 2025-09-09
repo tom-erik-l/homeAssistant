@@ -4,29 +4,15 @@ circadian_lighting:
   min_colortemp: 1000
   max_colortemp: 7000
   sunrise_offset: "02:00:00"
+  sunset_offset: "-02:00:00"
 
 switch:
-  - platform: circadian_lighting
-    name: Badevaerelse
-    lights_ct:
-      - light.grp_badevaerelse
-    disable_brightness_adjust: False
-    min_brightness: 1
-    max_brightness: 100
     # Consider adding the sleep state, but need some sort of device / combination of devices to determine if sleeping
 
   - platform: circadian_lighting
-    name: Gang
+    name: Kontor
     lights_ct:
-      - light.grp_gang
-    disable_brightness_adjust: False
-    min_brightness: 1
-    max_brightness: 100
-
-  - platform: circadian_lighting
-    name: Kokken
-    lights_ct:
-      - light.grp_kokken
+      - light.grp_kontor
     disable_brightness_adjust: False
     min_brightness: 1
     max_brightness: 100
@@ -40,9 +26,9 @@ switch:
     max_brightness: 100
 
   - platform: circadian_lighting
-    name: Spisestue
+    name: Entre
     lights_ct:
-      - light.grp_spisestue
+      - light.grp_entre
     disable_brightness_adjust: False
     min_brightness: 1
     max_brightness: 100
