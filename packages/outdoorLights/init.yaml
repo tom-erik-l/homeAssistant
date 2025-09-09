@@ -22,3 +22,13 @@ input_number:
 
 input_boolean:
   dim_available:
+
+input_datetime:
+  tid_for_dim_available:
+    name: Dæmpet lys tilgængelig fra
+    has_time: true
+    has_date: false
+  tid_for_dim_unavailable:
+    name: Dæmpet lys slukket fra
+    has_time: true
+    has_date: false

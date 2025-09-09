@@ -22,8 +22,12 @@ views:
           - entity: input_number.udendors_min_lux_for_dim
             name: Min. lux for dim activation
           - entity: input_select.udendors_lys_tilstand
-            name: State
-        title: Outdoor lights state machine
+            name: Tilstand
+          - entity: input_boolean.dim_available
+            name: Dæmpet tilgængelig
+          - entity: input_datetime.tid_for_dim_available
+          - entity: input_datetime.tid_for_dim_unavailable
+        title: Udendørs lys tilstand
 
       - type: entities
         entities:

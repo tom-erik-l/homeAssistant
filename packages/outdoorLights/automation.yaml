@@ -1,5 +1,7 @@
-automation:
 
+automation: !include automation-dimAvailable.yaml
+
+automation:
 ### STATE MACHINE
   - alias: ODLights - Lys state maskine OFF
     triggers:
@@ -38,28 +40,6 @@ automation:
         entity_id: light.grp_udendors_lys
       data:
         brightness_pct: "{{ states('input_number.udendors_full_brightness') | int }}"
-
-  - alias: ODLights - Dim Available
-    triggers:
-    - trigger: time
-      at: '07:00:00'
-    - trigger: time
-      at: '17:00:00'
-    actions:
-    - action: input_boolean.turn_on
-      target: 
-        entity_id: input_boolean.dim_available  
-
-  - alias: ODLights - Dim Un-Available
-    triggers:
-    - trigger: time
-      at: '09:00:00'
-    - trigger: time
-      at: '00:00:00'
-    actions:
-    - action: input_boolean.turn_off
-      target: 
-        entity_id: input_boolean.dim_available  
 
 ### TRANSITIONS
   - alias: ODLights - Turn off at midnight
