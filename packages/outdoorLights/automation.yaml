@@ -17,6 +17,11 @@ automation:
         to: "Dim"
       - trigger: state
         entity_id: input_number.udendors_dim_brightness
+        to: ~
+    conditions:
+    - condition: state
+      entity_id: input_select.udendors_lys_tilstand
+      state: "Dim"
     actions: 
       action: light.turn_on
       target:
@@ -31,6 +36,11 @@ automation:
         to: "Full"
       - trigger: state
         entity_id: input_number.udendors_full_brightness
+        to: ~
+    conditions:
+    - condition: state
+      entity_id: input_select.udendors_lys_tilstand
+      state: "Full"
     actions: 
       action: light.turn_on
       target:
@@ -39,37 +49,69 @@ automation:
         brightness_pct: "{{ states('input_number.udendors_full_brightness') | int }}"
 
 ### ODLIGHTS - TRANSITIONS
-  - alias: ODLights - Turn off at midnight
+  - alias: ODLights - Turn off at dim unavailable
     triggers:
-    - trigger: time
-      at: 00:00:00
+    - trigger: state
+      entity_id: input_boolean.dim_available
+      to: "off"
     actions:
-      - action: input_select.select_option
-        target:
-          entity_id: input_select.udendors_lys_tilstand
-        data:
-          option: "Off"
+    - choose:
+        # If in Dim state, turn off immediately
+        - conditions:
+          - condition: state
+            entity_id: input_select.udendors_lys_tilstand
+            state: "Dim"
+          sequence:
+          - action: input_select.select_option
+            target:
+              entity_id: input_select.udendors_lys_tilstand
+            data:
+              option: "Off"
+        # If in Full state, do nothing - let motion timeout handle it
+        # The "Return after motion" automation will check dim_available and go to "Off" instead of "Dim"
   
   - alias: ODLights - Turn on DIM at low light
-    trigger:
-    - platform: numeric_state
+    triggers:
+    - trigger: numeric_state
       entity_id: sensor.carport_bevaegelsessensor_illuminance
       below: input_number.udendors_min_lux_for_dim
+    - trigger: state
+      entity_id: input_boolean.dim_available
+      to: "on"
     conditions:
-      - condition: or
-        conditions:    
-        - condition: time
-          after: '07:00:00'
-          before: 09:00:00     
-        - condition: time
-          after: '17:00:00'
-          before: 00:00:00
+      - condition: state
+        entity_id: input_boolean.dim_available
+        state: "on"
+      - condition: numeric_state
+        entity_id: sensor.carport_bevaegelsessensor_illuminance
+        below: input_number.udendors_min_lux_for_dim
+      - condition: state
+        entity_id: input_select.udendors_lys_tilstand
+        state: "Off"
     actions:
       - action: input_select.select_option
         target:
           entity_id: input_select.udendors_lys_tilstand
         data:
           option: "Dim"
+
+  - alias: ODLights - Turn OFF at high light
+    triggers:
+    - trigger: numeric_state
+      entity_id: sensor.carport_bevaegelsessensor_illuminance
+      above: input_number.udendors_max_lux_for_off  
+      for:
+        minutes: 5  # Prevent flickering due to clouds/shadows
+    conditions:
+    - condition: state
+      entity_id: input_select.udendors_lys_tilstand
+      state: "Dim"
+    actions:
+      - action: input_select.select_option
+        target:
+          entity_id: input_select.udendors_lys_tilstand
+        data:
+          option: "Off"
 
   - alias: ODLights - Turn on FULL at motion detected
     trigger:
@@ -78,9 +120,11 @@ automation:
         - binary_sensor.carport_bevaegelsessensor_occupancy
       to: "on"
     conditions:
-    - condition: state
-      entity_id: input_select.udendors_lys_tilstand
-      state: "Dim"
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: input_select.udendors_lys_tilstand
+        state: "Full"
     actions:
       - action: input_select.select_option
         target:
@@ -104,7 +148,8 @@ automation:
         target:
           entity_id: input_select.udendors_lys_tilstand
         data:
-          option: "Dim"
+          option: "{{ 'Dim' if is_state('input_boolean.dim_available', 'on') else 'Off' }}"
+
 
 
 ### DIM AVAILABLE
