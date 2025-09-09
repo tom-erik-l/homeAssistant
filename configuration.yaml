@@ -13,6 +13,7 @@ logger:
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automation/
+automation uiManaged: !include automations.yaml
 script: !include_dir_merge_named  script/
 scene: !include scenes.yaml
 sensor: !include sensors.yaml

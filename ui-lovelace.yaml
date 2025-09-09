@@ -25,8 +25,10 @@ views:
             name: Tilstand
           - entity: input_boolean.dim_available
             name: Dæmpet tilgængelig
-          - entity: input_datetime.tid_for_dim_available
-          - entity: input_datetime.tid_for_dim_unavailable
+          - entity: input_datetime.tid_for_dim_available1
+          - entity: input_datetime.tid_for_dim_unavailable1
+          - entity: input_datetime.tid_for_dim_available2
+          - entity: input_datetime.tid_for_dim_unavailable2
         title: Udendørs lys tilstand
 
       - type: entities
