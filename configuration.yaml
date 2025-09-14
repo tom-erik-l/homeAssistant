@@ -33,6 +33,7 @@ lovelace:
 
 homeassistant:
   packages:
+    # forhavelys: !include packages/outdoorlights_forhave.yaml
     outdoorlights: !include_dir_merge_named packages/outdoorLights
     #wakeuplights: !include_dir_merge_named packages/wakeUpLights
     #circadianlights: !include_dir_merge_named packages/circadianLighting

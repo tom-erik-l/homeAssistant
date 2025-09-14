@@ -1,0 +1,169 @@
+# blueprint:
+#   name: ODLights - State Machine
+#   description: >
+#     Full state machine for Off / Dim / Full with lux & motion handling.
+#     Reusable for any light group using input_select, brightness inputs, motion sensor, and dim availability.
+#   domain: automation
+#   input:
+#     light_group:
+#       name: Light group
+#       selector:
+#         entity:
+#           domain: light
+#     state_input:
+#       name: Input select (Off/Dim/Full)
+#       selector:
+#         entity:
+#           domain: input_select
+#     dim_brightness:
+#       name: Dim brightness
+#       selector:
+#         entity:
+#           domain: input_number
+#     full_brightness:
+#       name: Full brightness
+#       selector:
+#         entity:
+#           domain: input_number
+#     lux_sensor:
+#       name: Lux sensor
+#       selector:
+#         entity:
+#           domain: sensor
+#           device_class: illuminance
+#     min_lux_for_dim:
+#       name: Min lux for dim
+#       selector:
+#         entity:
+#           domain: input_number
+#     max_lux_for_off:
+#       name: Max lux for off
+#       selector:
+#         entity:
+#           domain: input_number
+#     motion_sensor:
+#       name: Motion sensor
+#       selector:
+#         entity:
+#           domain: binary_sensor
+#           device_class: motion
+#     dim_available:
+#       name: Dim available
+#       selector:
+#         entity:
+#           domain: input_boolean
+
+# # Triggers: anything that could change the state
+# trigger:
+#   - platform: state
+#     entity_id:
+#       - !input state_input
+#       - !input dim_brightness
+#       - !input full_brightness
+#       - !input lux_sensor
+#       - !input motion_sensor
+#       - !input dim_available
+
+# # One automation with multiple mini-branches
+# action:
+#   - choose:
+
+#       # OFF state
+#       - conditions:
+#           - condition: state
+#             entity_id: !input state_input
+#             state: "Off"
+#         sequence:
+#           - service: light.turn_off
+#             target:
+#               entity_id: !input light_group
+
+#       # DIM state
+#       - conditions:
+#           - condition: state
+#             entity_id: !input state_input
+#             state: "Dim"
+#         sequence:
+#           - service: light.turn_on
+#             target:
+#               entity_id: !input light_group
+#             data:
+#               brightness_pct: "{{ states(!input dim_brightness) | int }}"
+
+#       # FULL state
+#       - conditions:
+#           - condition: state
+#             entity_id: !input state_input
+#             state: "Full"
+#         sequence:
+#           - service: light.turn_on
+#             target:
+#               entity_id: !input light_group
+#             data:
+#               brightness_pct: "{{ states(!input full_brightness) | int }}"
+
+#       # Auto DIM at low lux
+#       - conditions:
+#           - condition: numeric_state
+#             entity_id: !input lux_sensor
+#             below: !input min_lux_for_dim
+#           - condition: state
+#             entity_id: !input state_input
+#             state: "Off"
+#           - condition: state
+#             entity_id: !input dim_available
+#             state: "on"
+#         sequence:
+#           - service: input_select.select_option
+#             target:
+#               entity_id: !input state_input
+#             data:
+#               option: "Dim"
+
+#       # Auto OFF at high lux
+#       - conditions:
+#           - condition: numeric_state
+#             entity_id: !input lux_sensor
+#             above: !input max_lux_for_off
+#             for: "00:05:00"
+#           - condition: state
+#             entity_id: !input state_input
+#             state: "Dim"
+#         sequence:
+#           - service: input_select.select_option
+#             target:
+#               entity_id: !input state_input
+#             data:
+#               option: "Off"
+
+#       # Motion → FULL
+#       - conditions:
+#           - condition: state
+#             entity_id: !input motion_sensor
+#             state: "on"
+#           - condition: not
+#             conditions:
+#               - condition: state
+#                 entity_id: !input state_input
+#                 state: "Full"
+#         sequence:
+#           - service: input_select.select_option
+#             target:
+#               entity_id: !input state_input
+#             data:
+#               option: "Full"
+
+#       # Return after motion
+#       - conditions:
+#           - condition: state
+#             entity_id: !input motion_sensor
+#             state: "off"
+#           - condition: state
+#             entity_id: !input state_input
+#             state: "Full"
+#         sequence:
+#           - service: input_select.select_option
+#             target:
+#               entity_id: !input state_input
+#             data:
+#               option: "{{ 'Dim' if is_state(!input dim_available, 'on') else 'Off' }}"

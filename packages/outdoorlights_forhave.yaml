@@ -1,0 +1,13 @@
+# automation:
+#   - use_blueprint:
+#       path: outdoorLights/statemachine.yaml
+#       input:
+#         light_group: light.grp_udendors_lys
+#         state_input: input_select.udendors_lys_tilstand
+#         dim_brightness: input_number.udendors_dim_brightness
+#         full_brightness: input_number.udendors_full_brightness
+#         lux_sensor: sensor.carport_bevaegelsessensor_illuminance
+#         min_lux_for_dim: input_number.udendors_min_lux_for_dim
+#         max_lux_for_off: input_number.udendors_max_lux_for_off
+#         motion_sensor: binary_sensor.carport_bevaegelsessensor_occupancy
+#         dim_available: input_boolean.dim_available
