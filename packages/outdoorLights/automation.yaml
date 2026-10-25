@@ -1,176 +1,19 @@
 automation:
-### ODLIGHTS - STATE MACHINE
-  - alias: ODLights - Lys state maskine OFF
-    triggers:
-      - trigger: state
-        entity_id: input_select.udendors_lys_tilstand
-        to: "Off"
-    actions: 
-      action: light.turn_off
-      target:
-        entity_id: light.grp_udendors_lys
+  - alias: ODLights - Carport
+    use_blueprint:
+      path: outdoorLights/statemachine.yaml
+      input:
+        light_group: light.grp_forhave_lys
+        state_input: input_select.udendors_lys_tilstand
+        dim_brightness: input_number.udendors_dim_brightness
+        full_brightness: input_number.udendors_full_brightness
+        lux_sensor: sensor.carport_bevaegelsessensor_illuminance
+        min_lux_for_dim: input_number.udendors_min_lux_for_dim
+        max_lux_for_off: input_number.udendors_max_lux_for_off
+        motion_sensor: binary_sensor.carport_bevaegelsessensor_occupancy
+        dim_available: input_boolean.dim_available
+        dim_start_1: input_datetime.tid_for_dim_available1
+        dim_end_1: input_datetime.tid_for_dim_unavailable1
+        dim_start_2: input_datetime.tid_for_dim_available2
+        dim_end_2: input_datetime.tid_for_dim_unavailable2
 
-  - alias: ODLights - Lys state maskine DIM
-    triggers:
-      - trigger: state
-        entity_id: input_select.udendors_lys_tilstand
-        to: "Dim"
-      - trigger: state
-        entity_id: input_number.udendors_dim_brightness
-        to: ~
-    conditions:
-    - condition: state
-      entity_id: input_select.udendors_lys_tilstand
-      state: "Dim"
-    actions: 
-      action: light.turn_on
-      target:
-        entity_id: light.grp_udendors_lys
-      data:
-        brightness_pct: "{{ states('input_number.udendors_dim_brightness') | int }}"
-
-  - alias: ODLights - Lys state maskine FULL
-    triggers:
-      - trigger: state
-        entity_id: input_select.udendors_lys_tilstand
-        to: "Full"
-      - trigger: state
-        entity_id: input_number.udendors_full_brightness
-        to: ~
-    conditions:
-    - condition: state
-      entity_id: input_select.udendors_lys_tilstand
-      state: "Full"
-    actions: 
-      action: light.turn_on
-      target:
-        entity_id: light.grp_udendors_lys
-      data:
-        brightness_pct: "{{ states('input_number.udendors_full_brightness') | int }}"
-
-### ODLIGHTS - TRANSITIONS
-  - alias: ODLights - Turn off at dim unavailable
-    triggers:
-    - trigger: state
-      entity_id: input_boolean.dim_available
-      to: "off"
-    actions:
-    - choose:
-        # If in Dim state, turn off immediately
-        - conditions:
-          - condition: state
-            entity_id: input_select.udendors_lys_tilstand
-            state: "Dim"
-          sequence:
-          - action: input_select.select_option
-            target:
-              entity_id: input_select.udendors_lys_tilstand
-            data:
-              option: "Off"
-        # If in Full state, do nothing - let motion timeout handle it
-        # The "Return after motion" automation will check dim_available and go to "Off" instead of "Dim"
-  
-  - alias: ODLights - Turn on DIM at low light
-    triggers:
-    - trigger: numeric_state
-      entity_id: sensor.carport_bevaegelsessensor_illuminance
-      below: input_number.udendors_min_lux_for_dim
-    - trigger: state
-      entity_id: input_boolean.dim_available
-      to: "on"
-    conditions:
-      - condition: state
-        entity_id: input_boolean.dim_available
-        state: "on"
-      - condition: numeric_state
-        entity_id: sensor.carport_bevaegelsessensor_illuminance
-        below: input_number.udendors_min_lux_for_dim
-      - condition: state
-        entity_id: input_select.udendors_lys_tilstand
-        state: "Off"
-    actions:
-      - action: input_select.select_option
-        target:
-          entity_id: input_select.udendors_lys_tilstand
-        data:
-          option: "Dim"
-
-  - alias: ODLights - Turn OFF at high light
-    triggers:
-    - trigger: numeric_state
-      entity_id: sensor.carport_bevaegelsessensor_illuminance
-      above: input_number.udendors_max_lux_for_off  
-      for:
-        minutes: 5  # Prevent flickering due to clouds/shadows
-    conditions:
-    - condition: state
-      entity_id: input_select.udendors_lys_tilstand
-      state: "Dim"
-    actions:
-      - action: input_select.select_option
-        target:
-          entity_id: input_select.udendors_lys_tilstand
-        data:
-          option: "Off"
-
-  - alias: ODLights - Turn on FULL at motion detected
-    trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.carport_bevaegelsessensor_occupancy
-      to: "on"
-    conditions:
-    - condition: not
-      conditions:
-      - condition: state
-        entity_id: input_select.udendors_lys_tilstand
-        state: "Full"
-    actions:
-      - action: input_select.select_option
-        target:
-          entity_id: input_select.udendors_lys_tilstand
-        data:
-          option: "Full"
-
-  - alias: ODLights - Return after motion no longer detected 
-    trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.carport_bevaegelsessensor_occupancy
-      from: "on"
-      to: "off"
-    conditions:
-    - condition: state
-      entity_id: input_select.udendors_lys_tilstand
-      state: "Full"
-    actions:
-      - action: input_select.select_option
-        target:
-          entity_id: input_select.udendors_lys_tilstand
-        data:
-          option: "{{ 'Dim' if is_state('input_boolean.dim_available', 'on') else 'Off' }}"
-
-
-
-### DIM AVAILABLE
-  - alias: ODLights - Evaluate Dim Status
-    triggers:
-      # Check every 15 minutes
-      - trigger: time_pattern
-        minutes: '/15'
-      # Check whenever any datetime is changed
-      - platform: state
-        entity_id:
-          - input_datetime.tid_for_dim_available1
-          - input_datetime.tid_for_dim_unavailable1
-          - input_datetime.tid_for_dim_available2
-          - input_datetime.tid_for_dim_unavailable2
-        to: ~
-    actions:
-    # Calculate if we should be in "available" state
-    - action: input_boolean.turn_{{ 'on' if (
-          (today_at(states('input_datetime.tid_for_dim_available1')) <= now() < today_at(states('input_datetime.tid_for_dim_unavailable1'))) or
-          (today_at(states('input_datetime.tid_for_dim_available2')) <= now() < today_at(states('input_datetime.tid_for_dim_unavailable2')))
-        ) else 'off' }}
-      target:
-        entity_id: input_boolean.dim_available
