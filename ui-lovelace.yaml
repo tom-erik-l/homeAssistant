@@ -3,17 +3,8 @@ views:
     title: Home
     cards:
       - type: entities
-        entities:
-          - entity: input_select.udendors_lys_tilstand
-            name: Carport
-          - entity: input_select.kontor_lys_tilstand
-            name: Kontor
-          - entity: input_select.tilbygning_lys_tilstand
-            name: Tilbygning
-        title: Udendørs lys - zonetilstand
+        title: Fælles indstillinger
         show_header_toggle: false
-
-      - type: entities
         entities:
           - entity: input_number.udendors_dim_brightness
             name: Dæmpet lys niveau
@@ -29,10 +20,17 @@ views:
           - entity: input_datetime.tid_for_dim_unavailable1
           - entity: input_datetime.tid_for_dim_available2
           - entity: input_datetime.tid_for_dim_unavailable2
-        title: Udendørs lys tilstand
 
       - type: entities
+        title: Carport
+        show_header_toggle: false
         entities:
+          - entity: input_select.udendors_lys_tilstand
+            name: Tilstand
+          - entity: light.grp_forhave_lys
+            name: Carport og hoveddør gruppe
+          - entity: light.carport_lys
+            name: Carport
           - entity: light.hoveddor_lys
             name: Hoveddør
           - entity: sensor.carport_bevaegelsessensor_illuminance
@@ -41,7 +39,43 @@ views:
             name: Occupancy
           - entity: sensor.carport_bevaegelsessensor_temperature
             name: Temperature
-        title: Carport bevægelsessensor
+
+      - type: entities
+        title: Kontor
+        show_header_toggle: false
+        entities:
+          - entity: input_select.kontor_lys_tilstand
+            name: Tilstand
+          - entity: light.kontor_lys
+            name: Kontor
+          - entity: sensor.kontor_bevaegelsessensor_illuminance
+            name: Illuminance
+          - entity: binary_sensor.kontor_bevaegelsessensor_occupancy
+            name: Occupancy
+          - entity: sensor.kontor_bevaegelsessensor_temperature
+            name: Temperature
+
+      - type: entities
+        title: Tilbygning
+        show_header_toggle: false
+        entities:
+          - entity: input_select.tilbygning_lys_tilstand
+            name: Tilstand
+          - entity: light.tilbygning_lys
+            name: Tilbygning
+          - entity: sensor.terasse_bevaegelsessensor_illuminance
+            name: Illuminance
+          - entity: binary_sensor.terasse_bevaegelsessensor_occupancy
+            name: Occupancy
+          - entity: sensor.terasse_bevaegelsessensor_temperature
+            name: Temperature
+
+      - type: entities
+        title: Alle udendørs lys
+        show_header_toggle: false
+        entities:
+          - entity: light.grp_udendors_lys
+            name: Samlet lysgruppe
 
       # - type: entities
       #   entities:
