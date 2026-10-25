@@ -2,3 +2,11 @@
 # - platform: time_date
 #   display_options:
 #     - 'time'
+
+- platform: min_max
+  name: Outdoor Lowest Illuminance
+  type: min
+  entity_ids:
+    - sensor.carport_bevaegelsessensor_illuminance
+    - sensor.kontor_bevaegelsessensor_illuminance
+    - sensor.tilbygning_bevaegelsessensor_illuminance
