@@ -17,3 +17,38 @@ automation:
         dim_start_2: input_datetime.tid_for_dim_available2
         dim_end_2: input_datetime.tid_for_dim_unavailable2
 
+  - alias: ODLights - Kontor
+    use_blueprint:
+      path: outdoorLights/statemachine.yaml
+      input:
+        light_group: light.kontor_lys
+        state_input: input_select.kontor_lys_tilstand
+        dim_brightness: input_number.udendors_dim_brightness
+        full_brightness: input_number.udendors_full_brightness
+        lux_sensor: sensor.kontor_bevaegelsessensor_illuminance
+        min_lux_for_dim: input_number.udendors_min_lux_for_dim
+        max_lux_for_off: input_number.udendors_max_lux_for_off
+        motion_sensor: binary_sensor.kontor_bevaegelsessensor_occupancy
+        dim_available: input_boolean.dim_available
+        dim_start_1: input_datetime.tid_for_dim_available1
+        dim_end_1: input_datetime.tid_for_dim_unavailable1
+        dim_start_2: input_datetime.tid_for_dim_available2
+        dim_end_2: input_datetime.tid_for_dim_unavailable2
+
+  - alias: ODLights - Tilbygning
+    use_blueprint:
+      path: outdoorLights/statemachine.yaml
+      input:
+        light_group: light.tilbygning_lys
+        state_input: input_select.tilbygning_lys_tilstand
+        dim_brightness: input_number.udendors_dim_brightness
+        full_brightness: input_number.udendors_full_brightness
+        lux_sensor: sensor.tilbygning_bevaegelsessensor_illuminance
+        min_lux_for_dim: input_number.udendors_min_lux_for_dim
+        max_lux_for_off: input_number.udendors_max_lux_for_off
+        motion_sensor: binary_sensor.terasse_bevaegelsessensor_occupancy
+        dim_available: input_boolean.dim_available
+        dim_start_1: input_datetime.tid_for_dim_available1
+        dim_end_1: input_datetime.tid_for_dim_unavailable1
+        dim_start_2: input_datetime.tid_for_dim_available2
+        dim_end_2: input_datetime.tid_for_dim_unavailable2

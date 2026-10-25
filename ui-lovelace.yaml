@@ -15,6 +15,17 @@ views:
 
       - type: entities
         entities:
+          - entity: input_select.udendors_lys_tilstand
+            name: Carport
+          - entity: input_select.kontor_lys_tilstand
+            name: Kontor
+          - entity: input_select.tilbygning_lys_tilstand
+            name: Tilbygning
+        title: Udendørs lys - zonetilstand
+        show_header_toggle: false
+
+      - type: entities
+        entities:
           - entity: input_number.udendors_dim_brightness
             name: Dæmpet lys niveau
           - entity: input_number.udendors_full_brightness
@@ -23,8 +34,6 @@ views:
             name: Min. lux for dæmpet tænding
           - entity: input_number.udendors_max_lux_for_off
             name: Max. lux inden dæmpet slukning
-          - entity: input_select.udendors_lys_tilstand
-            name: Tilstand
           - entity: input_boolean.dim_available
             name: Dæmpet tilgængelig
           - entity: input_datetime.tid_for_dim_available1

@@ -4,7 +4,19 @@ input_select:
       - "Off"
       - "Dim"
       - "Full"
-    name: Udendørs Lys Tilstand
+    name: Udendørs lys tilstand
+  kontor_lys_tilstand:
+    options:
+      - "Off"
+      - "Dim"
+      - "Full"
+    name: Kontor lys tilstand
+  tilbygning_lys_tilstand:
+    options:
+      - "Off"
+      - "Dim"
+      - "Full"
+    name: Tilbygning lys tilstand
 
 input_number:
   udendors_dim_brightness:
