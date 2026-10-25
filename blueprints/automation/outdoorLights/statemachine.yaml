@@ -50,6 +50,11 @@ blueprint:
       selector:
         entity:
           domain: input_boolean
+    dimming_enabled:
+      name: Dimming enabled for this zone
+      selector:
+        entity:
+          domain: input_boolean
     dim_start_1:
       name: Dim available from 1
       selector:
@@ -94,6 +99,14 @@ triggers:
     entity_id: !input dim_available
     to: "off"
     id: dim_unavailable
+  - trigger: state
+    entity_id: !input dimming_enabled
+    to: "off"
+    id: dimming_disabled
+  - trigger: state
+    entity_id: !input dimming_enabled
+    to: "on"
+    id: dimming_enabled
   - trigger: numeric_state
     entity_id: !input lux_sensor
     below: !input min_lux_for_dim
@@ -134,6 +147,7 @@ actions:
       dim_brightness_entity: !input dim_brightness
       full_brightness_entity: !input full_brightness
       dim_available_entity: !input dim_available
+      dimming_enabled_entity: !input dimming_enabled
       dim_start_1_entity: !input dim_start_1
       dim_end_1_entity: !input dim_end_1
       dim_start_2_entity: !input dim_start_2
@@ -155,6 +169,9 @@ actions:
           - condition: state
             entity_id: !input state_input
             state: "Dim"
+          - condition: state
+            entity_id: !input dimming_enabled
+            state: "on"
         sequence:
           - action: light.turn_on
             target:
@@ -165,8 +182,28 @@ actions:
       - conditions:
           - condition: trigger
             id:
+              - state_dim
+              - dimming_disabled
+          - condition: state
+            entity_id: !input state_input
+            state: "Dim"
+          - condition: state
+            entity_id: !input dimming_enabled
+            state: "off"
+        sequence:
+          - action: input_select.select_option
+            target:
+              entity_id: !input state_input
+            data:
+              option: "Off"
+
+      - conditions:
+          - condition: trigger
+            id:
               - state_full
               - full_brightness_changed
+              - dimming_disabled
+              - dimming_enabled
           - condition: state
             entity_id: !input state_input
             state: "Full"
@@ -175,7 +212,7 @@ actions:
             target:
               entity_id: !input light_group
             data:
-              brightness_pct: "{{ states(full_brightness_entity) | int }}"
+              brightness_pct: "{{ states(full_brightness_entity) | int if is_state(dimming_enabled_entity, 'on') else 100 }}"
 
       - conditions:
           - condition: trigger
@@ -195,12 +232,16 @@ actions:
             id:
               - low_lux
               - dim_available
+              - dimming_enabled
           - condition: state
             entity_id: !input dim_available
             state: "on"
           - condition: numeric_state
             entity_id: !input lux_sensor
             below: !input min_lux_for_dim
+          - condition: state
+            entity_id: !input dimming_enabled
+            state: "on"
           - condition: state
             entity_id: !input state_input
             state: "Off"
@@ -250,7 +291,7 @@ actions:
             target:
               entity_id: !input state_input
             data:
-              option: "{{ 'Dim' if is_state(dim_available_entity, 'on') else 'Off' }}"
+              option: "{{ 'Dim' if is_state(dim_available_entity, 'on') and is_state(dimming_enabled_entity, 'on') else 'Off' }}"
 
       - conditions:
           - condition: trigger

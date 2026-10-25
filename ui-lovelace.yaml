@@ -27,8 +27,8 @@ views:
         entities:
           - entity: input_select.udendors_lys_tilstand
             name: Tilstand
-          - entity: light.grp_forhave_lys
-            name: Carport og hoveddør gruppe
+          - entity: input_boolean.carport_dimming_enabled
+            name: Kan dæmpes
           - entity: light.carport_lys
             name: Carport
           - entity: light.hoveddor_lys
@@ -46,6 +46,8 @@ views:
         entities:
           - entity: input_select.kontor_lys_tilstand
             name: Tilstand
+          - entity: input_boolean.kontor_dimming_enabled
+            name: Kan dæmpes
           - entity: light.kontor_lys
             name: Kontor
           - entity: sensor.kontor_bevaegelsessensor_illuminance
@@ -61,6 +63,8 @@ views:
         entities:
           - entity: input_select.tilbygning_lys_tilstand
             name: Tilstand
+          - entity: input_boolean.tilbygning_dimming_enabled
+            name: Kan dæmpes
           - entity: light.tilbygning_lys
             name: Tilbygning
           - entity: sensor.terasse_bevaegelsessensor_illuminance

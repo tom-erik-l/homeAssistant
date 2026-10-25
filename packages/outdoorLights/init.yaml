@@ -38,6 +38,15 @@ input_number:
 
 input_boolean:
   dim_available:
+  carport_dimming_enabled:
+    name: Carport dimming enabled
+    initial: true
+  kontor_dimming_enabled:
+    name: Kontor dimming enabled
+    initial: true
+  tilbygning_dimming_enabled:
+    name: Tilbygning dimming enabled
+    initial: false
 
 input_datetime:
   tid_for_dim_available1:
