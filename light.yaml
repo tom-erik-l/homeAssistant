@@ -38,6 +38,7 @@
     - light.carport_lys
     - light.hoveddor_lys
     - light.kontor_lys
+    - light.tilbygning_lys
 
 - platform: group
   name: grp forhave lys

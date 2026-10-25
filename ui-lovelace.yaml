@@ -44,6 +44,9 @@ views:
           - entity: light.kontor_lys
             name: Kontor
 
+          - entity: light.tilbygning_lys
+            name: Tilbygning
+
           - entity: light.grp_udendors_lys
             name: Outdoor lights group
 
