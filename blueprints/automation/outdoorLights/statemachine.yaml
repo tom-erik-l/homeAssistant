@@ -255,3 +255,5 @@ actions:
               entity_id: !input state_input
             data:
               option: "{{ 'Dim' if is_state(dim_available_entity, 'on') and is_state(dimming_enabled_entity, 'on') else 'Off' }}"
+
+mode: queued
