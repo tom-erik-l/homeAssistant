@@ -1,0 +1,74 @@
+blueprint:
+  name: Outdoor lights - Shared dim availability schedule
+  description: >
+    Calculates whether dim lighting is available in the configured time windows.
+    Create one instance for the helpers shared by your outdoor-light zones.
+  domain: automation
+  input:
+    dim_available:
+      name: Dim availability helper
+      selector:
+        entity:
+          domain: input_boolean
+    dim_start_1:
+      name: Dim available from 1
+      selector:
+        entity:
+          domain: input_datetime
+    dim_end_1:
+      name: Dim unavailable from 1
+      selector:
+        entity:
+          domain: input_datetime
+    dim_start_2:
+      name: Dim available from 2
+      selector:
+        entity:
+          domain: input_datetime
+    dim_end_2:
+      name: Dim unavailable from 2
+      selector:
+        entity:
+          domain: input_datetime
+
+triggers:
+  - trigger: time_pattern
+    minutes: "/15"
+    id: schedule_refresh
+  - trigger: state
+    entity_id:
+      - !input dim_start_1
+      - !input dim_end_1
+      - !input dim_start_2
+      - !input dim_end_2
+    to: null
+    id: schedule_changed
+
+actions:
+  - variables:
+      dim_start_1_entity: !input dim_start_1
+      dim_end_1_entity: !input dim_end_1
+      dim_start_2_entity: !input dim_start_2
+      dim_end_2_entity: !input dim_end_2
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: >-
+              {% set start_1 = states(dim_start_1_entity) %}
+              {% set end_1 = states(dim_end_1_entity) %}
+              {% set start_2 = states(dim_start_2_entity) %}
+              {% set end_2 = states(dim_end_2_entity) %}
+              {{ start_1 not in ['unknown', 'unavailable'] and
+                 end_1 not in ['unknown', 'unavailable'] and
+                 start_2 not in ['unknown', 'unavailable'] and
+                 end_2 not in ['unknown', 'unavailable'] and
+                 ((today_at(start_1) <= now() < today_at(end_1)) or
+                  (today_at(start_2) <= now() < today_at(end_2))) }}
+        sequence:
+          - action: input_boolean.turn_on
+            target:
+              entity_id: !input dim_available
+    default:
+      - action: input_boolean.turn_off
+        target:
+          entity_id: !input dim_available

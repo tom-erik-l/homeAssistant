@@ -13,10 +13,6 @@ automation:
         motion_sensor: binary_sensor.carport_bevaegelsessensor_occupancy
         dim_available: input_boolean.dim_available
         dimming_enabled: input_boolean.carport_dimming_enabled
-        dim_start_1: input_datetime.tid_for_dim_available1
-        dim_end_1: input_datetime.tid_for_dim_unavailable1
-        dim_start_2: input_datetime.tid_for_dim_available2
-        dim_end_2: input_datetime.tid_for_dim_unavailable2
 
   - alias: ODLights - Kontor
     use_blueprint:
@@ -32,10 +28,6 @@ automation:
         motion_sensor: binary_sensor.kontor_bevaegelsessensor_occupancy
         dim_available: input_boolean.dim_available
         dimming_enabled: input_boolean.kontor_dimming_enabled
-        dim_start_1: input_datetime.tid_for_dim_available1
-        dim_end_1: input_datetime.tid_for_dim_unavailable1
-        dim_start_2: input_datetime.tid_for_dim_available2
-        dim_end_2: input_datetime.tid_for_dim_unavailable2
 
   - alias: ODLights - Tilbygning
     use_blueprint:
@@ -51,6 +43,12 @@ automation:
         motion_sensor: binary_sensor.terasse_bevaegelsessensor_occupancy
         dim_available: input_boolean.dim_available
         dimming_enabled: input_boolean.tilbygning_dimming_enabled
+
+  - alias: ODLights - Shared dim availability schedule
+    use_blueprint:
+      path: outdoorLights/dim_availability.yaml
+      input:
+        dim_available: input_boolean.dim_available
         dim_start_1: input_datetime.tid_for_dim_available1
         dim_end_1: input_datetime.tid_for_dim_unavailable1
         dim_start_2: input_datetime.tid_for_dim_available2
