@@ -3,9 +3,24 @@ automation:
     use_blueprint:
       path: outdoorLights/statemachine.yaml
       input:
-        light_group: light.grp_forhave_lys
+        light_group: light.carport_lys
         state_input: input_select.udendors_lys_tilstand
-        dim_brightness: input_number.udendors_dim_brightness
+        dim_brightness: input_number.carport_dim_brightness
+        full_brightness: input_number.udendors_full_brightness
+        lux_sensor: sensor.outdoor_lowest_illuminance
+        min_lux_for_dim: input_number.udendors_min_lux_for_dim
+        max_lux_for_off: input_number.udendors_max_lux_for_off
+        motion_sensor: binary_sensor.carport_bevaegelsessensor_occupancy
+        dim_available: input_boolean.dim_available
+        dimming_enabled: input_boolean.carport_dimming_enabled
+
+  - alias: ODLights - Hoveddør
+    use_blueprint:
+      path: outdoorLights/statemachine.yaml
+      input:
+        light_group: light.hoveddor_lys
+        state_input: input_select.udendors_lys_tilstand
+        dim_brightness: input_number.hoveddor_dim_brightness
         full_brightness: input_number.udendors_full_brightness
         lux_sensor: sensor.outdoor_lowest_illuminance
         min_lux_for_dim: input_number.udendors_min_lux_for_dim
@@ -20,7 +35,7 @@ automation:
       input:
         light_group: light.kontor_lys
         state_input: input_select.kontor_lys_tilstand
-        dim_brightness: input_number.udendors_dim_brightness
+        dim_brightness: input_number.kontor_dim_brightness
         full_brightness: input_number.udendors_full_brightness
         lux_sensor: sensor.outdoor_lowest_illuminance
         min_lux_for_dim: input_number.udendors_min_lux_for_dim
@@ -35,7 +50,7 @@ automation:
       input:
         light_group: light.tilbygning_lys
         state_input: input_select.tilbygning_lys_tilstand
-        dim_brightness: input_number.udendors_dim_brightness
+        dim_brightness: input_number.tilbygning_dim_brightness
         full_brightness: input_number.udendors_full_brightness
         lux_sensor: sensor.outdoor_lowest_illuminance
         min_lux_for_dim: input_number.udendors_min_lux_for_dim

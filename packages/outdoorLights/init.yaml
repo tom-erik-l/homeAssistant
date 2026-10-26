@@ -19,10 +19,30 @@ input_select:
     name: Tilbygning lys tilstand
 
 input_number:
-  udendors_dim_brightness:
+  carport_dim_brightness:
     min: 25
     max: 100
     step: 1
+    initial: 32
+    name: Carport dim brightness
+  hoveddor_dim_brightness:
+    min: 25
+    max: 100
+    step: 1
+    initial: 32
+    name: Hoveddør dim brightness
+  kontor_dim_brightness:
+    min: 25
+    max: 100
+    step: 1
+    initial: 32
+    name: Kontor dim brightness
+  tilbygning_dim_brightness:
+    min: 25
+    max: 100
+    step: 1
+    initial: 32
+    name: Tilbygning dim brightness
   udendors_full_brightness:
     min: 30
     max: 100
