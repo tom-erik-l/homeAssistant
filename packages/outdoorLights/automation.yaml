@@ -12,7 +12,6 @@ automation:
         max_lux_for_off: input_number.udendors_max_lux_for_off
         motion_sensor: binary_sensor.carport_bevaegelsessensor_occupancy
         dim_available: input_boolean.dim_available
-        dimming_enabled: input_boolean.carport_dimming_enabled
 
   - alias: ODLights - Hoveddør
     use_blueprint:
@@ -27,7 +26,6 @@ automation:
         max_lux_for_off: input_number.udendors_max_lux_for_off
         motion_sensor: binary_sensor.carport_bevaegelsessensor_occupancy
         dim_available: input_boolean.dim_available
-        dimming_enabled: input_boolean.carport_dimming_enabled
 
   - alias: ODLights - Kontor
     use_blueprint:
@@ -42,7 +40,6 @@ automation:
         max_lux_for_off: input_number.udendors_max_lux_for_off
         motion_sensor: binary_sensor.kontor_bevaegelsessensor_occupancy
         dim_available: input_boolean.dim_available
-        dimming_enabled: input_boolean.kontor_dimming_enabled
 
   - alias: ODLights - Tilbygning
     use_blueprint:
@@ -57,7 +54,6 @@ automation:
         max_lux_for_off: input_number.udendors_max_lux_for_off
         motion_sensor: binary_sensor.terasse_bevaegelsessensor_occupancy
         dim_available: input_boolean.dim_available
-        dimming_enabled: input_boolean.tilbygning_dimming_enabled
 
   - alias: ODLights - Shared dim availability schedule
     use_blueprint:

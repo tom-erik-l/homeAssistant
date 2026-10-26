@@ -29,8 +29,6 @@ views:
             name: Carport dæmpet lys niveau
           - entity: input_number.hoveddor_dim_brightness
             name: Hoveddør dæmpet lys niveau
-          - entity: input_boolean.carport_dimming_enabled
-            name: Kan dæmpes
           - entity: light.carport_lys
             name: Carport
           - entity: light.hoveddor_lys
@@ -50,8 +48,6 @@ views:
             name: Tilstand
           - entity: input_number.kontor_dim_brightness
             name: Dæmpet lys niveau
-          - entity: input_boolean.kontor_dimming_enabled
-            name: Kan dæmpes
           - entity: light.kontor_lys
             name: Kontor
           - entity: sensor.kontor_bevaegelsessensor_illuminance
@@ -69,8 +65,6 @@ views:
             name: Tilstand
           - entity: input_number.tilbygning_dim_brightness
             name: Dæmpet lys niveau
-          - entity: input_boolean.tilbygning_dimming_enabled
-            name: Kan dæmpes
           - entity: light.tilbygning_lys
             name: Tilbygning
           - entity: sensor.terasse_bevaegelsessensor_illuminance
