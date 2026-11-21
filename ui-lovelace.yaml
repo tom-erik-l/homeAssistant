@@ -83,9 +83,13 @@ views:
         #  - entity: sensor.terasse_bevaegelsessensor_illuminance
         #    name: Illuminance
           - entity: binary_sensor.terasse_bevaegelsessensor_occupancy
-            name: Occupancy
+            name: Terasse Occupancy
+          - entity: binary_sensor.forhave_bevaegelsessensor_occupancy
+            name: Forhave Occupancy
           - entity: sensor.terasse_bevaegelsessensor_temperature
-            name: Temperature
+            name: Terasse Temperature
+          - entity: sensor.forhave_bevaegelsessensor_temperature
+            name: Forhave Temperature
 
       - type: entities
         title: Alle udendørs lys

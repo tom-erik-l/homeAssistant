@@ -82,3 +82,12 @@ input_datetime:
     name: Dæmpet lys slukket fra 2
     has_time: true
     has_date: false
+
+template:
+  - binary_sensor:
+      - name: Tilbygning Occupancy
+        unique_id: outdoor_tilbygning_combined_occupancy
+        device_class: occupancy
+        state: >-
+          {{ is_state('binary_sensor.forhave_bevaegelsessensor_occupancy', 'on')
+             or is_state('binary_sensor.terasse_bevaegelsessensor_occupancy', 'on') }}

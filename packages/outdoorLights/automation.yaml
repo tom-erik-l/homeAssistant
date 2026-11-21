@@ -52,7 +52,7 @@ automation:
         lux_sensor: sensor.outdoor_lowest_illuminance
         min_lux_for_dim: input_number.udendors_min_lux_for_dim
         max_lux_for_off: input_number.udendors_max_lux_for_off
-        motion_sensor: binary_sensor.terasse_bevaegelsessensor_occupancy
+        motion_sensor: binary_sensor.tilbygning_occupancy
         dim_available: input_boolean.dim_available
 
   - alias: ODLights - Shared dim availability schedule
