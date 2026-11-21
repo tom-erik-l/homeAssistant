@@ -26,18 +26,31 @@ views:
           - entity: input_select.udendors_lys_tilstand
             name: Tilstand
           - entity: input_number.carport_dim_brightness
-            name: Carport dæmpet lys niveau
-          - entity: input_number.hoveddor_dim_brightness
-            name: Hoveddør dæmpet lys niveau
+            name: Dæmpet lys niveau
           - entity: light.carport_lys
             name: Carport
-          - entity: light.hoveddor_lys
-            name: Hoveddør
           - entity: sensor.carport_bevaegelsessensor_illuminance
             name: Illuminance
           - entity: binary_sensor.carport_bevaegelsessensor_occupancy
             name: Occupancy
           - entity: sensor.carport_bevaegelsessensor_temperature
+            name: Temperature
+
+      - type: entities
+        title: Hoveddør
+        show_header_toggle: false
+        entities:
+          - entity: input_select.hoveddor_lys_tilstand
+            name: Tilstand
+          - entity: input_number.hoveddor_dim_brightness
+            name: Dæmpet lys niveau
+          - entity: light.hoveddor_lys
+            name: Hoveddør
+          - entity: sensor.hoveddor_bevaegelsessensor_illuminance
+            name: Illuminance
+          - entity: binary_sensor.hoveddor_bevaegelsessensor_occupancy
+            name: Occupancy
+          - entity: sensor.hoveddor_bevaegelsessensor_temperature
             name: Temperature
 
       - type: entities

@@ -5,6 +5,12 @@ input_select:
       - "Dim"
       - "Full"
     name: Udendørs lys tilstand
+  hoveddor_lys_tilstand:
+    options:
+      - "Off"
+      - "Dim"
+      - "Full"
+    name: Hoveddør lys tilstand
   kontor_lys_tilstand:
     options:
       - "Off"

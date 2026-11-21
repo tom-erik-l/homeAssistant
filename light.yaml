@@ -33,20 +33,6 @@
 #     - light.repos_3
 
 - platform: group
-  name: grp udendørs lys
-  entities: 
-    - light.carport_lys
-    - light.hoveddor_lys
-    - light.kontor_lys
-    - light.tilbygning_lys
-
-- platform: group
-  name: grp forhave lys
-  entities: 
-    - light.carport_lys
-    - light.hoveddor_lys
-    
-- platform: group
   name: grp baghave lys
   entities: 
     - light.kontor_lys
