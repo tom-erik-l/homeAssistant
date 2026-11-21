@@ -29,8 +29,8 @@ views:
             name: Dæmpet lys niveau
           - entity: light.carport_lys
             name: Carport
-          - entity: sensor.carport_bevaegelsessensor_illuminance
-            name: Illuminance
+        #  - entity: sensor.carport_bevaegelsessensor_illuminance
+        #    name: Illuminance
           - entity: binary_sensor.carport_bevaegelsessensor_occupancy
             name: Occupancy
           - entity: sensor.carport_bevaegelsessensor_temperature
@@ -46,8 +46,8 @@ views:
             name: Dæmpet lys niveau
           - entity: light.hoveddor_lys
             name: Hoveddør
-          - entity: sensor.hoveddor_bevaegelsessensor_illuminance
-            name: Illuminance
+        #  - entity: sensor.hoveddor_bevaegelsessensor_illuminance
+        #    name: Illuminance
           - entity: binary_sensor.hoveddor_bevaegelsessensor_occupancy
             name: Occupancy
           - entity: sensor.hoveddor_bevaegelsessensor_temperature
@@ -63,8 +63,8 @@ views:
             name: Dæmpet lys niveau
           - entity: light.kontor_lys
             name: Kontor
-          - entity: sensor.kontor_bevaegelsessensor_illuminance
-            name: Illuminance
+        #  - entity: sensor.kontor_bevaegelsessensor_illuminance
+        #    name: Illuminance
           - entity: binary_sensor.kontor_bevaegelsessensor_occupancy
             name: Occupancy
           - entity: sensor.kontor_bevaegelsessensor_temperature
@@ -80,8 +80,8 @@ views:
             name: Dæmpet lys niveau
           - entity: light.tilbygning_lys
             name: Tilbygning
-          - entity: sensor.terasse_bevaegelsessensor_illuminance
-            name: Illuminance
+        #  - entity: sensor.terasse_bevaegelsessensor_illuminance
+        #    name: Illuminance
           - entity: binary_sensor.terasse_bevaegelsessensor_occupancy
             name: Occupancy
           - entity: sensor.terasse_bevaegelsessensor_temperature
