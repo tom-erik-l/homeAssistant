@@ -36,13 +36,3 @@
   name: grp baghave lys
   entities: 
     - light.kontor_lys
-
-# - platform: group
-#   name: grp Carport
-#   entities:
-#     - light.carport_lys
-
-# - platform: group
-#   name: grp Hoveddør
-#   entities:
-#     - light.hoveddor_lys

@@ -91,17 +91,3 @@ views:
           - entity: sensor.forhave_bevaegelsessensor_temperature
             name: Forhave Temperature
 
-      - type: entities
-        title: Alle udendørs lys
-        show_header_toggle: false
-        entities:
-          - entity: light.grp_udendors_lys
-            name: Samlet lysgruppe
-
-      # - type: entities
-      #   entities:
-      #     - input_boolean.enablewakeuplights
-      #     - sensor.nextalarm
-      #     - person.tom_erik
-      #   title: Wake-up Lights
-

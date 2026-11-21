@@ -1,4 +1,3 @@
-
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
@@ -16,7 +15,6 @@ automation: !include_dir_merge_list automation/
 automation uiManaged: !include automations.yaml
 script: !include_dir_merge_named  script/
 scene: !include scenes.yaml
-sensor: !include sensors.yaml
 light: !include light.yaml
 
 lovelace:
@@ -40,7 +38,6 @@ lovelace:
 
 homeassistant:
   packages:
-    # forhavelys: !include packages/outdoorlights_forhave.yaml
     outdoorlights: !include_dir_merge_named packages/outdoorLights
     #wakeuplights: !include_dir_merge_named packages/wakeUpLights
     #circadianlights: !include_dir_merge_named packages/circadianLighting
